@@ -1,0 +1,1189 @@
+<!doctype html>
+<!-- 神经网络训练营 / Neural Camp. Copyright (c) 2026 Neural Camp contributors.
+SPDX-License-Identifier: MIT. Permission is hereby granted, free of charge, to any
+person obtaining a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including without
+limitation the rights to use, copy, modify, merge, publish, distribute, sublicense,
+and/or sell copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions: The above copyright notice
+and this permission notice shall be included in all copies or substantial portions
+of the Software. THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS
+OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. -->
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0a1019">
+<meta name="description" content="完全离线的神经网络训练营：驾驶飞船、示范教学、亲眼看见一个纯 JavaScript 神经网络学习。">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; connect-src 'none'; font-src 'none'; media-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>神经网络训练营 · NEURAL CAMP</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%230d1821'/%3E%3Cpath d='M32 10L51 49 32 40 13 49Z' fill='%2363efc0'/%3E%3C/svg%3E">
+<style>
+:root{color-scheme:dark;--bg:#0b1018;--panel:#111923;--panel2:#151f2b;--line:#24303e;--muted:#94a0b1;--text:#eef3f7;--mint:#6de7bd;--violet:#ac94ed;--amber:#f0ce7c;--blue:#84b8ef;--dim:#647488;--radius:14px}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,"Segoe UI","Microsoft YaHei",sans-serif;font-size:14px;line-height:1.55}button,input,select{font:inherit}button,a,select,summary{ -webkit-tap-highlight-color:transparent}button{cursor:pointer;color:inherit}button:disabled{opacity:.45;cursor:not-allowed}button,select,input{outline-offset:4px}button:focus-visible,a:focus-visible,summary:focus-visible,canvas:focus-visible{outline:2px solid var(--mint);outline-offset:4px}button{transition:background .18s,border-color .18s,transform .18s}button:hover:not(:disabled){filter:brightness(1.14)}button:active:not(:disabled){transform:translateY(1px)}svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}.sprite{display:none}[hidden]{display:none!important}h1,h2,h3,p{margin:0}h2{font-size:14px;font-weight:650;letter-spacing:.1px;display:flex;align-items:center;gap:8px}h3{font-size:17px}a{color:inherit}.sidebar{width:218px;position:fixed;inset:0 auto 0 0;padding:31px 21px 23px;border-right:1px solid #202a36;background:#0e151e;display:flex;flex-direction:column;z-index:20}.brand{display:flex;gap:11px;align-items:center;text-decoration:none;font-size:19px;letter-spacing:2px;font-weight:750;line-height:1.2}.brandmark{height:41px;width:41px;display:grid;place-items:center;border:1px solid #426859;border-radius:12px;background:#20342f;color:var(--mint);transform:rotate(-5deg)}.brandmark svg{width:25px;height:25px}.brand-second{display:block;font-size:13px;letter-spacing:3px;margin-top:5px;color:#bdc7d2}.brand-second b{font-size:10px;letter-spacing:0;color:#718092;font-weight:400;margin-left:2px}.nav-caption{font-size:10px;letter-spacing:2px;color:#7d8a9c;margin:51px 12px 17px}.nav-item{display:flex;align-items:center;gap:12px;border:1px solid transparent;border-radius:9px;background:none;width:100%;padding:13px 12px;margin-bottom:9px;color:#99a6b8;text-align:left;font-size:13px}.nav-item svg{width:18px;height:18px}.nav-item.active{background:#1b302d;color:var(--mint);border-color:#2c4a40}.nav-dot{height:5px;width:5px;border-radius:50%;background:var(--mint);margin-left:auto}.nav-tag{font-size:8px;color:#6f7f94;border:1px solid #384351;border-radius:4px;padding:1px 3px;margin-left:auto}.side-mission{margin-top:44px;border:1px solid #2a3943;border-radius:12px;padding:17px 15px;background:radial-gradient(ellipse at 0 0,#213331 0,transparent 70%),#151e27}.eyebrow{font-size:10px;letter-spacing:2px;font-weight:600;color:var(--mint);display:flex;align-items:center;gap:7px}.side-mission .eyebrow{font-size:8px;letter-spacing:1.2px;color:#99b3aa}.mission-icon{margin:22px 0 13px;color:var(--mint)}.mission-icon svg{width:27px;height:27px}.side-mission h3{line-height:1.8;font-size:15px;font-weight:600}.side-mission p{font-size:11px;color:var(--muted);margin:10px 0 20px;line-height:1.9}.progress-track{background:#24303b;height:4px;border-radius:8px;overflow:hidden}.progress-track i{display:block;width:0;height:100%;background:var(--mint);border-radius:8px;transition:width .3s}.mission-count{display:flex;justify-content:space-between;color:#9aaaae;font-size:10px;margin-top:9px}.text-button{background:transparent;border:0;color:var(--mint);display:inline-flex;gap:8px;align-items:center;padding:7px 0;font-size:12px}.text-button svg{width:14px;height:14px}.side-mission .text-button{margin-top:12px;font-size:11px}.side-bottom{font-size:11px;color:#a6b2bd;margin-top:auto;padding-top:30px}.side-bottom div{font-size:9px;color:#788697;margin-top:8px}.version{display:block;font-size:9px;color:#59687b;margin-top:18px}.online-dot,.status-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--mint);box-shadow:0 0 8px #6de7bd30;margin-right:4px}.workspace{margin-left:218px}.topbar{height:73px;border-bottom:1px solid #202a36;display:flex;justify-content:space-between;align-items:center;padding:0 36px;background:#0d131c}.breadcrumb{font-size:11px;color:#8290a1}.breadcrumb span{margin:0 13px;color:#4e5b6c}.breadcrumb strong{font-weight:400;color:#d8dfe6}.top-actions{display:flex;align-items:center;gap:22px}.offline{display:flex;align-items:center;gap:7px;color:#a8b7b5;font-size:10px}.offline svg{width:14px;height:14px;color:#6ba891}.subtle-button{display:flex;gap:7px;align-items:center;background:none;border:1px solid #334050;padding:7px 11px;border-radius:6px;font-size:11px;color:#c1cad5}.subtle-button svg{width:14px;height:14px}main{max-width:1580px;margin:auto;padding:32px 36px 0}.hero{display:flex;align-items:center;justify-content:space-between;margin:1px 0 27px}.hero h1{font-size:30px;font-weight:650;letter-spacing:1px;margin:9px 0 7px}.hero h1 span{color:var(--mint)}.hero p,.page-heading p{font-size:12px;color:var(--muted)}.hero-stamp{display:flex;align-items:center;gap:12px;color:#9eaab9;font-size:10px}.hero-stamp svg{height:30px;width:30px;color:#658a85}.hero-stamp strong{display:inline-block;font-size:10px;font-weight:400;color:#637389;margin-top:5px}.overview{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);background:var(--panel);border-radius:12px;margin-bottom:23px;padding:20px 0}.overview>div{padding:0 21px;display:flex;gap:12px;align-items:center;position:relative;border-right:1px solid var(--line)}.overview>div:last-child{border:0}.stat-icon{height:37px;width:37px;display:grid;place-items:center;background:#192c2a;border:1px solid #254038;border-radius:10px;margin-bottom:16px}.stat-icon.violet{background:#282439;border-color:#3b334c}.stat-icon.amber{background:#2d2b24;border-color:#413b2a}.stat-icon.blue{background:#202b3b;border-color:#2f3d53}.mint{color:var(--mint)}.violet{color:var(--violet)}.amber{color:var(--amber)}.blue{color:var(--blue)}.muted{color:var(--muted)}.overview small{display:block;color:#94a1b3;font-size:10px;margin-bottom:1px}.overview strong{font-family:Consolas,monospace;font-size:28px;font-weight:500;letter-spacing:1px}.overview em{font-style:normal;color:#6f7f91;font-size:10px;margin-left:6px}.stat-sub{font-size:9px;color:#6f7f91;position:absolute;bottom:-5px;left:71px;white-space:nowrap}.overview section{padding-bottom:9px}.lab-grid{display:grid;grid-template-columns:minmax(0,1fr) 333px;gap:20px;align-items:start}.game-column,.inspector{display:flex;flex-direction:column;gap:20px}.panel{border:1px solid var(--line);border-radius:var(--radius);background:var(--panel);overflow:hidden}.panel-heading{display:flex;justify-content:space-between;align-items:center;padding:18px 20px;gap:10px}.panel-heading .label{font-size:8px}.label{font-weight:500;font-size:9px;border:1px solid #354150;background:#1a2430;padding:2px 6px;border-radius:4px;color:#a5b2c0;white-space:nowrap}.panel-heading h2>.status-dot{width:6px;height:6px;margin-right:1px}.help{border:1px solid #4a5767;border-radius:50%;width:16px;height:16px;display:inline-grid;place-items:center;line-height:1;font-size:10px;padding:0;background:none;color:#99a7b8;flex-shrink:0}.arena-toolbar{display:flex;gap:12px;padding:0 20px 15px;align-items:center}.arena-toolbar label{display:flex;gap:6px;align-items:center;color:#748297;font-size:10px}select{background:#18222d;border:1px solid #344253;color:#cdd6df;border-radius:6px;padding:6px 21px 6px 8px;font-size:11px;max-width:100%}.arena-toolbar select{font-size:10px;padding:5px 4px}.keyboard-hint{margin-left:auto;color:#728296;font-size:9px;white-space:nowrap}kbd{font:9px Consolas,monospace;color:#8b9bae;border:1px solid #384758;border-radius:3px;padding:2px 3px;margin-right:2px}.canvas-wrap{position:relative;background:#0a141e;border-block:1px solid #293440;isolation:isolate}#game{display:block;width:100%;aspect-ratio:5/3;touch-action:none}.hud{position:absolute;left:22px;right:22px;top:18px;display:flex;justify-content:space-between;pointer-events:none}.hud small{display:block;color:#7f94a7;font-size:9px;letter-spacing:.5px}.hud strong{font:27px Consolas,monospace;color:#edf5f7;margin-top:4px;display:block}.hud-right{text-align:right}.hud-right>span{color:var(--mint);font-size:17px;letter-spacing:4px}.hud-right small{margin-top:10px}.hud-right b{margin:0 6px}.game-message{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(0deg,#09141a99,#0b162242,#0b162222);padding:30px;text-align:center}.live-tag{color:var(--mint);font-size:9px;letter-spacing:2px;border:1px solid #38584e;border-radius:20px;padding:5px 12px;background:#142d2699}.game-message h3{font-size:24px;letter-spacing:1px;margin:14px 0 8px;font-weight:650}.game-message p{font-size:11px;color:#b0bfcc;max-width:360px}.game-message .primary{margin-top:21px;box-shadow:0 0 32px #61d4ae17;padding:10px 22px}.mini-hint{font-size:9px;color:#80939f;margin-top:13px}.canvas-bottom{display:flex;align-items:center;justify-content:center;position:absolute;bottom:14px;left:10px;right:10px;gap:23px;pointer-events:none;font-size:9px;color:#9aaebb}.canvas-bottom>span{display:flex;align-items:center;gap:6px}.legend-star{width:6px;height:6px;background:var(--amber);transform:rotate(45deg)}.legend-meteor{width:7px;height:7px;border:1px solid #94a4bb;border-radius:2px;transform:rotate(30deg)}.record-dot{width:5px;height:5px;border-radius:50%;background:var(--mint)}.game-controls{display:flex;align-items:center;gap:9px;padding:15px 18px 9px}.primary,.secondary,.small-button{display:inline-flex;gap:7px;align-items:center;justify-content:center;border-radius:7px;padding:9px 14px;font-weight:600;font-size:11px;border:1px solid transparent;white-space:nowrap}.primary{background:var(--mint);color:#10251f;border-color:var(--mint)}.primary svg{width:14px;height:14px}.secondary,.small-button{background:#1a2532;border-color:#354355;color:#c2cedb;font-weight:500}.secondary svg{width:14px;height:14px}.small-button{padding:6px 11px;font-size:10px}.icon-button{display:inline-flex;align-items:center;justify-content:center;background:transparent;border:1px solid #344152;width:34px;height:34px;border-radius:6px;color:#a6b3c1}.icon-button svg{width:15px;height:15px}.control-select{margin-left:auto;display:flex;align-items:center;gap:6px;color:#8390a2;font-size:10px}.control-select select{font-size:10px}.context-note{padding:0 19px 15px;font-size:10px;color:#8493a6;line-height:1.8}.arena-day{font-size:9px;color:var(--mint)}.daily-score{font-size:11px;padding:0 20px 12px;color:var(--amber)}.chart-panel .panel-heading{padding-bottom:11px}.chart-tabs{display:flex;gap:10px}.chart-tabs button{background:none;color:#8290a2;font-size:10px;border:0;padding:3px 0;border-bottom:1px solid transparent}.chart-tabs button.active{color:var(--mint);border-color:var(--mint)}.chart-legend{display:flex;gap:15px;font-size:9px;color:#97a6b8;padding:0 20px 8px;align-items:center}.chart-legend span{display:flex;gap:5px;align-items:center;white-space:nowrap}.chart-legend span:before,.mint-dot:before,.violet-dot:before,.dim-dot:before{content:'';display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--mint)}.chart-legend .violet-dot:before,.violet-dot:before{background:var(--violet)}.chart-legend .dim-dot:before,.dim-dot:before{background:#52677d}.chart-legend small{margin-left:auto;font-size:8px;color:#64758a}.chart-panel canvas{display:block;width:100%;height:145px}.chart-footer{display:flex;justify-content:space-between;padding:8px 20px 15px;font-size:8px;color:#65758b}.tiny-status{font-size:8px;color:#94a3b2;display:flex;align-items:center;gap:3px}.tiny-status .online-dot{width:4px;height:4px}.brain-panel .panel-heading{padding:17px 18px 12px}.brain-panel .panel-heading svg{height:17px;width:17px}.network-labels{display:flex;justify-content:space-between;margin:0 28px;font-size:8px;color:#788a9f}.brain-panel #network{width:100%;height:167px;display:block}.network-footer{padding:3px 18px 12px;display:flex;justify-content:space-between;color:#94a4b7;font-size:9px}.action-bars{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin:0 18px 16px}.action{font-size:8px;text-align:center;color:#7c8ca2}.action .bar{height:3px;background:#283445;border-radius:4px;overflow:hidden;margin:5px 0}.action .bar i{display:block;background:var(--mint);height:100%}.action.active{color:var(--mint)}.heatmap{border-top:1px solid #263240;padding:10px 18px}.heatmap summary{font-size:10px;color:#a6b4c4;cursor:pointer}.heatmap summary span{float:right;color:#65768b;font-size:8px}.heatmap>label{font-size:9px;margin-top:15px;display:flex;align-items:center;gap:7px}.heatmap canvas{width:100%;height:110px}.heatmap p{font-size:8px;color:var(--muted);margin-bottom:5px}.training-panel .panel-heading{padding-bottom:13px}.training-tabs{display:flex;background:#0e1620;border:1px solid #283444;border-radius:7px;margin:0 18px 17px;padding:3px;gap:3px}.training-tabs button{flex:1;border:0;background:none;color:#8d9bae;font-size:11px;padding:7px;border-radius:5px}.training-tabs button.active{background:#25332f;color:var(--mint);box-shadow:0 1px 3px #0004}#trainer-evolution,#trainer-imitation{padding:0 18px 14px}.training-panel h3{font-size:14px;font-weight:600;display:flex;justify-content:space-between;align-items:center}.training-panel h3 svg{width:16px;height:16px;color:var(--amber)}.training-panel p{font-size:10px;color:#91a0b3;line-height:1.85;margin:7px 0 17px}.training-stats{display:grid;grid-template-columns:repeat(3,1fr);margin:0 0 16px;gap:10px}.training-stats small{font-size:8px;color:#7f91a6;display:block;margin-bottom:4px}.training-stats strong{font:21px Consolas,monospace;font-weight:500;color:#dee7ef}.training-stats>div+div{border-left:1px solid var(--line);padding-left:12px}.training-progress{margin-bottom:13px}.training-progress span{font-size:8px;color:#8999ac;display:block;margin-top:6px}.evo-actions{display:flex;gap:8px}.evo-actions select{font-size:10px;padding:6px;width:55px}.full{width:100%}.training-panel .secondary.full{margin-top:9px;font-size:10px}.training-panel .secondary.full span{margin-left:auto}.training-panel .fineprint{font-size:8px;color:#728298;margin:10px 0 1px;line-height:1.8}.model-tools{display:flex;justify-content:space-between;padding:13px 18px;border-top:1px solid var(--line)}.model-tools button{background:none;border:0;color:#8e9fb4;font-size:9px;padding:0}.bottom-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:20px}.compare-panel .panel-heading{padding-bottom:17px}.compare-panel .panel-heading>svg{width:17px;height:17px}.compare-row{display:flex;align-items:center;padding:0 20px;gap:16px;font-size:10px;margin-bottom:13px}.compare-row>span{min-width:70px;color:#aebdc9;display:flex;gap:7px;align-items:center}.compare-row>div{height:6px;background:#26313d;flex:1;border-radius:5px;overflow:hidden}.compare-row>div>i{display:block;width:0;height:100%;background:var(--mint);min-width:2px;border-radius:5px}.compare-row.ai>div>i{background:var(--violet)}.compare-row>strong{font:12px Consolas,monospace;min-width:29px;text-align:right}.compare-panel>p{font-size:9px;color:#7c8ca0;padding:0 20px}.replay-row{display:flex;gap:20px;padding:7px 20px 10px}.replay-row button{font-size:9px;color:#9bafbd}.log-panel ol{margin:0;padding:0 20px 16px;list-style:none;max-height:155px;overflow-y:auto;scrollbar-width:thin}.log-panel li{font-size:10px;color:#a7b5c6;display:flex;gap:12px;line-height:1.8;margin-bottom:8px}.log-panel time{font:9px Consolas,monospace;color:#697d92;padding-top:4px;min-width:38px}.log-panel li:first-child span{color:#bed4cf}footer{display:flex;justify-content:space-between;align-items:center;border-top:1px solid #202b37;color:#6d8194;padding:19px 0 23px;font-size:9px;margin-top:26px;gap:15px}footer span{display:flex;align-items:center;gap:7px}footer svg{width:13px;height:13px;color:#7ba894}.intro{display:flex;align-items:center;gap:15px;border:1px solid #3b6055;padding:15px 18px;border-radius:10px;background:#142621;margin-bottom:22px}.step-badge{font:11px Consolas,monospace;color:var(--mint);white-space:nowrap}.intro strong{font-size:12px}.intro p{font-size:10px;color:#a6bdb5;margin-top:4px}.intro .small-button{margin-left:auto;white-space:nowrap}.intro .icon-button{border:0;flex-shrink:0}.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);padding:14px 23px;border:1px solid #4b7062;max-width:min(90vw,600px);background:#1c332dee;box-shadow:0 15px 80px #000a;border-radius:11px;color:#e5f7ec;font-size:12px;z-index:90;animation:toast-in .3s ease}.tooltip{position:fixed;background:#24323f;color:#e0e8ed;box-shadow:0 6px 30px #0009;border:1px solid #506173;border-radius:7px;padding:12px 15px;max-width:290px;z-index:100;font-size:11px;pointer-events:none}.page-heading{margin:5px 0 28px}.page-heading h1{font-size:29px;font-weight:650;margin:10px 0}.wide-panel{margin-bottom:23px}.settings-notice{color:#b0c6c0;background:#192a27;border:1px solid #304f45;border-radius:10px;padding:14px 20px;font-size:12px;margin-bottom:22px}.settings-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-bottom:22px}.setting-body{padding:0 22px 22px}.setting-row{padding:14px 0;border-top:1px solid #25313f}.setting-row label{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:#c7d3df;gap:12px}.setting-row output{font:12px Consolas,monospace;color:var(--mint)}input[type=range]{width:100%;accent-color:var(--mint);height:4px;margin:18px 0 4px}input[type=checkbox]{accent-color:var(--mint)}.setting-row small{font-size:10px;color:#7c8ea4;display:block;margin-top:7px}.setting-row select{min-width:110px}.preset-row{display:flex;align-items:end;padding:0 22px 24px;gap:18px;flex-wrap:wrap}.preset-row label{display:flex;flex-direction:column;gap:7px;color:#9daebf;font-size:11px}.preset-row input{background:#0d1621;border:1px solid #39495c;padding:8px 10px;border-radius:7px;color:#dbe6ef;width:200px}.preset-row select{height:37px;min-width:170px}.accessibility{display:flex;flex-wrap:wrap;gap:24px;font-size:12px;color:#bccad5;padding:0 22px 20px}.career-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-bottom:24px}.career-stat{border:1px solid var(--line);background:var(--panel);padding:24px;border-radius:12px}.career-stat small{font-size:11px;color:var(--muted);display:block}.career-stat strong{font:32px Consolas,monospace;display:block;margin-top:10px;color:var(--mint)}.wide-panel canvas{width:100%;display:block;height:210px}.empty-note{font-size:11px;color:#7b8fa5;padding:0 23px 22px}.achievements{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding:0 22px 23px}.achievement{display:flex;align-items:center;gap:12px;padding:20px 16px;border:1px solid #2c3847;border-radius:9px;background:#131d28;opacity:.6}.achievement.unlocked{opacity:1;background:#1a2926;border-color:#3d6355}.achievement>span{color:#74869b}.achievement.unlocked>span{color:var(--amber)}.achievement svg{width:27px;height:27px}.achievement strong{font-size:12px}.achievement p{font-size:10px;color:#8da0b5;margin-top:6px}.tutorial-panel{padding-bottom:24px;margin-bottom:25px}.lesson-visual{display:flex;align-items:center;justify-content:center;gap:30px;min-height:170px;background:radial-gradient(ellipse at center,#18393280,transparent 70%);margin:0 20px}.lesson-box{padding:20px 25px;border:1px solid #3b6054;border-radius:12px;text-align:center;background:#183028;color:#c9e6dc;animation:lesson-pulse 3s infinite}.lesson-box strong{display:block;font-size:22px;color:var(--mint);margin-bottom:9px}.lesson-box small{color:#9ab4ae}.lesson-arrow{color:var(--mint);font-size:26px}.tutorial-panel>h3,.tutorial-panel>p{padding:0 27px}.tutorial-panel>h3{margin:18px 0 10px;font-size:19px}.tutorial-panel>p{font-size:13px;color:#a6b9c9;max-width:1000px;line-height:1.95}.lesson-actions{display:flex;justify-content:space-between;padding:25px 27px 0}.rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}.rule-card{padding:23px}.rule-card h3{font-size:14px;color:#d1e1dd;margin-bottom:15px}.rule-card h3 span{font:11px Consolas,monospace;margin-right:9px;color:var(--mint)}.rule-card p,.rule-card li{font-size:12px;color:#a0b2c4;line-height:1.9}.rule-card ul{padding-left:16px;margin:0}.rule-card li+li{margin-top:6px}.rule-card strong{color:#c5d7de;font-weight:500}.view.active{animation:view-in .3s ease}.large-font{font-size:16px}.large-font p,.large-font button,.large-font select,.large-font label,.large-font small{font-size:max(12px,1em)}.large-font .hero p{font-size:15px}.colorblind{--mint:#85c7ff;--violet:#ffbd78;--amber:#f9df8b;--blue:#b3c7ff}.reduced-motion *{animation:none!important;transition:none!important}@keyframes toast-in{from{opacity:0;transform:translate(-50%,10px)}to{opacity:1;transform:translate(-50%,0)}}@keyframes lesson-pulse{50%{box-shadow:0 0 35px #6de7bd10}}@keyframes view-in{from{opacity:.5;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+@media(min-width:1600px){.lab-grid{grid-template-columns:minmax(0,1fr) 365px}.brain-panel #network{height:192px}.chart-panel canvas{height:170px}.game-controls{padding-top:20px;padding-bottom:14px}.training-panel p{font-size:12px}.training-panel .fineprint{font-size:10px}.training-panel .primary{padding:11px 14px}.training-stats small{font-size:10px}.training-panel h3{font-size:16px}.panel-heading h2{font-size:15px}.network-labels{font-size:10px}}
+@media(max-width:1200px){.sidebar{width:180px;padding:26px 14px}.workspace{margin-left:180px}main{padding:25px 23px 0}.topbar{padding:0 24px}.brand{font-size:16px;gap:8px}.brandmark{width:34px;height:37px}.brand-second{font-size:11px}.brand-second b{display:none}.lab-grid{grid-template-columns:minmax(0,1fr) 300px;gap:15px}.overview>div{padding:0 13px;gap:9px}.stat-sub{left:59px;font-size:8px}.stat-icon{width:33px;height:33px}.overview strong{font-size:25px}.keyboard-hint{display:none}.hero h1{font-size:27px}.panel-heading{padding:15px}.arena-toolbar{padding-inline:15px;gap:8px}.chart-panel h2{font-size:12px}.chart-legend{gap:10px}.chart-legend small{display:none}.hero-stamp{display:none}.game-controls{gap:6px;padding-inline:12px}.game-controls .secondary{padding-inline:9px}.control-select>span{display:none}.side-mission{padding:15px 12px}.bottom-grid{gap:15px}.game-message h3{font-size:21px}.game-message p{font-size:10px}.game-message .primary{margin-top:15px}.canvas-bottom{font-size:8px;gap:14px}}
+@media(max-width:1000px){.sidebar{width:74px;padding:25px 12px}.brand>span:last-child,.nav-caption,.side-mission,.side-bottom,.nav-item .nav-dot,.nav-tag{display:none}.brand{justify-content:center}.sidebar nav{margin-top:40px}.nav-item{font-size:0;padding:13px;justify-content:center;gap:0}.nav-item svg{width:19px;height:19px}.workspace{margin-left:74px}.lab-grid{grid-template-columns:minmax(0,1fr) 285px}.overview>div{gap:8px}.stat-icon{display:none}.stat-sub{left:13px}.overview strong{font-size:26px}.overview{padding:16px 0}.overview section{padding-bottom:13px}.game-message{padding:20px}.game-message h3{font-size:20px}.arena-toolbar select{max-width:120px}.game-controls .primary{font-size:10px;padding:8px 9px}.game-controls .secondary{font-size:10px;padding:8px}.game-controls .icon-button{width:30px}.game-controls .text-button{font-size:9px}.game-controls .control-select select{max-width:78px}.chart-panel .panel-heading{align-items:start;gap:9px}.chart-tabs{gap:8px}.chart-tabs button{font-size:8px;white-space:nowrap}.achievements{grid-template-columns:1fr 1fr}.hero h1{font-size:27px}}
+@media(max-width:820px){.lab-grid{grid-template-columns:1fr}.inspector{display:grid;grid-template-columns:1fr 1fr;gap:15px;align-items:start}.overview{margin-bottom:19px}.hero{margin-bottom:24px}.game-message h3{font-size:26px}.game-message p{font-size:12px}.game-message .primary{padding:11px 22px}.arena-toolbar select{max-width:none}.keyboard-hint{display:block}.game-controls .primary,.game-controls .secondary{padding:9px 14px;font-size:11px}.game-controls .control-select select{max-width:none}.game-controls .control-select>span{display:inline}.canvas-bottom{font-size:10px;gap:25px}.chart-panel canvas{height:170px}.chart-panel h2{font-size:14px}.chart-tabs button{font-size:10px}.brain-panel #network{height:195px}.bottom-grid{grid-template-columns:1fr 1fr}.career-stats{gap:12px}.career-stat{padding:17px}.career-stat strong{font-size:25px}.rules-grid{grid-template-columns:1fr}.lesson-visual{gap:12px}.lesson-box{padding:18px}.intro{gap:10px;padding:13px}.intro .step-badge{display:none}}
+@media(max-width:600px){.sidebar{position:static;width:100%;height:65px;padding:0 17px;flex-direction:row;align-items:center;border-right:0;border-bottom:1px solid #24313e}.brand>span:last-child{display:block;font-size:13px;letter-spacing:1px}.brand-second{font-size:9px;margin-top:4px}.brandmark{width:31px;height:32px;border-radius:9px}.brandmark svg{width:20px;height:20px}.sidebar nav{display:flex;margin:0 0 0 auto;gap:5px}.nav-item{width:34px;height:35px;padding:8px;margin:0;border-radius:7px}.nav-item svg{width:17px;height:17px}.workspace{margin:0}.topbar{height:45px;padding:0 17px}.breadcrumb{font-size:9px}.top-actions{gap:8px}.offline{font-size:8px;gap:4px}.offline svg{width:12px}.subtle-button{font-size:9px;padding:5px 6px}.subtle-button svg{display:none}main{padding:24px 15px 0}.hero .eyebrow{font-size:8px;letter-spacing:1.7px}.hero h1{font-size:25px;letter-spacing:0;margin-top:10px}.hero p{font-size:10px;line-height:1.9;max-width:300px}.overview{grid-template-columns:repeat(4,1fr);border-radius:10px;padding:14px 0 16px}.overview>div{padding:0 10px}.overview small{font-size:8px;white-space:nowrap}.overview strong{font-size:22px}.overview em{display:none}.stat-sub{font-size:6px;left:10px;bottom:-5px}.overview section{padding-bottom:6px}.arena-panel .panel-heading{padding:13px 13px 12px}.arena-panel h2{font-size:12px}.arena-toolbar{padding:0 12px 12px;gap:8px;flex-wrap:wrap}.arena-toolbar label{font-size:9px}.arena-toolbar select{font-size:9px;max-width:136px}.keyboard-hint{display:none}.arena-day{font-size:8px}.canvas-wrap #game{aspect-ratio:5/4;object-fit:fill}.hud{top:13px;left:14px;right:14px}.hud strong{font-size:24px}.hud small{font-size:8px}.hud-right>span{font-size:15px}.hud-right small{margin-top:5px}.game-message{padding:55px 15px 35px}.game-message h3{font-size:22px;margin-top:12px}.game-message p{font-size:10px;max-width:250px}.live-tag{font-size:8px;letter-spacing:1.5px}.game-message .primary{padding:9px 15px;font-size:10px;margin-top:15px}.mini-hint{font-size:8px;margin-top:11px}.canvas-bottom{bottom:10px;gap:16px;font-size:8px}.game-controls{padding:12px 11px 9px;gap:7px;flex-wrap:wrap}.game-controls .primary,.game-controls .secondary{padding:8px 9px;font-size:10px}.game-controls .icon-button{width:28px;height:31px}.game-controls .control-select{margin-left:auto}.control-select>span{display:none!important}.control-select select{font-size:9px!important;max-width:77px!important;padding:6px}.game-controls .text-button{font-size:9px}.context-note{font-size:9px;padding:0 12px 12px}.inspector{grid-template-columns:1fr}.brain-panel #network{height:210px}.brain-panel .network-labels{margin-inline:36px}.brain-panel .network-footer{font-size:10px}.training-panel p{font-size:12px}.training-panel .fineprint{font-size:10px}.training-panel .primary,.training-panel .secondary{font-size:12px;padding:11px}.training-stats{margin-top:18px}.training-stats small{font-size:10px}.training-progress span{font-size:10px}.model-tools button{font-size:10px}.chart-panel .panel-heading{flex-wrap:wrap}.chart-panel h2{font-size:12px}.chart-tabs{margin-left:auto}.chart-legend{font-size:8px;padding-inline:15px}.chart-panel canvas{height:155px}.bottom-grid{grid-template-columns:1fr}.log-panel ol{max-height:180px}.intro{align-items:start;gap:8px;flex-wrap:wrap}.intro>div{flex:1;min-width:220px}.intro p{font-size:10px}.intro .small-button{margin-left:0}.intro .icon-button{position:absolute;right:19px;margin-top:-6px}.intro strong{padding-right:17px}.intro .small-button{margin-top:4px}.page-heading h1{font-size:24px}.page-heading p{font-size:11px}.settings-grid{grid-template-columns:1fr}.settings-notice{font-size:11px;padding:14px}.career-stats{grid-template-columns:1fr 1fr}.achievements{grid-template-columns:1fr}.lesson-visual{gap:7px;margin:0 12px;min-height:130px}.lesson-box{padding:15px 10px;font-size:10px}.lesson-box strong{font-size:16px}.lesson-box small{font-size:9px}.lesson-arrow{font-size:19px}.tutorial-panel>h3{font-size:17px}.tutorial-panel>p{font-size:12px}.rule-card{padding:19px}.page-heading .eyebrow{font-size:8px;letter-spacing:1.3px}.preset-row{gap:14px}.preset-row label{width:100%}.preset-row input,.preset-row select{width:100%}.accessibility{flex-direction:column;gap:18px}.game-column,.inspector{gap:16px}.lab-grid{gap:16px}footer{font-size:8px;line-height:1.8;padding:16px 0;justify-content:center}footer>span:last-child{display:none}.toast{font-size:11px;bottom:20px;padding:12px 17px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+.fitness-details{display:flex;justify-content:space-between;gap:12px;color:#8297ab;font-size:9px;padding:0 0 12px}.fitness-details b{font:11px Consolas,monospace;color:var(--mint);margin-left:6px}
+
+.purity-note{display:flex;align-items:center;gap:5px;font-size:9px;color:#83baa7;margin-top:11px;letter-spacing:.15px}.purity-note svg{width:12px;height:12px}@media(max-width:600px){.purity-note{font-size:8px;letter-spacing:0}}
+
+</style>
+</head>
+<body>
+<svg aria-hidden="true" class="sprite" xmlns="http://www.w3.org/2000/svg"><symbol id="i-ship" viewBox="0 0 24 24"><path d="m12 3 8 18-8-4-8 4z"/><path d="M12 10v7"/></symbol><symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></symbol><symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 3v17h17M7 14l4-5 4 3 5-7"/></symbol><symbol id="i-sliders" viewBox="0 0 24 24"><path d="M5 3v5m0 6v7M12 3v10m0 6v2M19 3v2m0 6v10M2 8h6m1 5h6m1-8h6"/></symbol><symbol id="i-book" viewBox="0 0 24 24"><path d="M12 6C8 3 5 3 2 4v15c4-1 7-1 10 2 3-3 6-3 10-2V4c-4-1-7-1-10 2zm0 0v15"/></symbol><symbol id="i-play" viewBox="0 0 24 24"><path d="m8 5 12 7-12 7z"/></symbol><symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"/></symbol><symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 8a8 8 0 1 0 0 9M20 3v5h-5"/></symbol><symbol id="i-brain" viewBox="0 0 24 24"><path d="M12 4v16M8 4a3 3 0 0 0-5 3 4 4 0 0 0 0 7 4 4 0 0 0 5 6h4V4zm8 0a3 3 0 0 1 5 3 4 4 0 0 1 0 7 4 4 0 0 1-5 6h-4V4zM4 9h3l2 3m-5 4 4-1m12-6h-3l-2 3m5 4-4-1"/></symbol><symbol id="i-star" viewBox="0 0 24 24"><path d="m12 2 3 7 7 3-7 3-3 7-3-7-7-3 7-3z"/></symbol><symbol id="i-shield" viewBox="0 0 24 24"><path d="m12 2 9 4v6c0 5-9 10-9 10S3 17 3 12V6zM8 12l3 3 5-6"/></symbol><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15m-6-6 6 6-6 6"/></symbol><symbol id="i-cup" viewBox="0 0 24 24"><path d="M7 3h10v7a5 5 0 0 1-10 0zm0 2H3v3a4 4 0 0 0 4 4m10-7h4v3a4 4 0 0 1-4 4M12 15v5m-5 1h10"/></symbol><symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></symbol></svg>
+<aside class="sidebar">
+ <a href="#camp" class="brand" aria-label="神经网络训练营首页"><span class="brandmark"><svg><use href="#i-brain"/></svg></span><span>NEURAL<span class="brand-second">CAMP <b>实验室</b></span></span></a>
+ <div class="nav-caption">探索 · 学习 · 进化</div>
+ <nav aria-label="主导航"><button class="nav-item active" data-view="camp"><svg><use href="#i-grid"/></svg>训练场<span class="nav-dot"></span></button><button class="nav-item" data-view="career"><svg><use href="#i-chart"/></svg>学习档案</button><button class="nav-item" data-view="settings"><svg><use href="#i-sliders"/></svg>参数实验室<span class="nav-tag">PRO</span></button><button class="nav-item" data-view="guide"><svg><use href="#i-book"/></svg>游戏指南</button></nav>
+ <div class="side-mission"><div class="eyebrow">YOUR FIRST MISSION</div><div class="mission-icon"><svg><use href="#i-star"/></svg></div><h3>每一次示范，<br>都是一次启发。</h3><p>收集 500 个动作样本，<br>教出你的第一位 AI 学员。</p><div class="progress-track"><i id="mission-progress"></i></div><div class="mission-count"><span id="side-samples">0 / 500</span><span>样本</span></div><button class="text-button" id="practice">去练习场 <svg><use href="#i-arrow"/></svg></button></div>
+ <div class="side-bottom"><span class="online-dot"></span> 本地实验环境<div>纯 JavaScript · 从零开始训练</div><span class="version">开源 / MIT &nbsp; · &nbsp; v1.0</span></div>
+</aside>
+<div class="workspace">
+ <header class="topbar"><div class="breadcrumb">工作空间 <span>/</span> <strong id="breadcrumb-title">训练场</strong></div><div class="top-actions"><span class="offline"><svg><use href="#i-shield"/></svg>离线运行 · 数据只在本机</span><button class="subtle-button" id="tutorial-open"><svg><use href="#i-book"/></svg>新手教程</button></div></header>
+ <main>
+ <section class="view active" id="view-camp">
+ <div class="hero"><div><div class="eyebrow"><span class="online-dot"></span> PLAY. TEACH. EVOLVE.</div><h1>让它，从零学会飞行<span>。</span></h1><p>你来驾驶，AI 来学习。亲眼见证一个神经网络的第一次成长。</p><div class="purity-note"><svg><use href="#i-shield"/></svg>本游戏完全离线运行，无广告、无追踪、不联网</div></div><div class="hero-stamp"><svg><use href="#i-brain"/></svg><span>真正的神经网络<br><strong>没有预设答案</strong></span></div></div>
+ <div class="intro" id="intro" hidden><span class="step-badge" id="intro-step">01 / 04</span><div><strong id="intro-title"></strong><p id="intro-text"></p></div><button class="small-button" id="intro-next">下一步 →</button><button class="icon-button" id="intro-skip" aria-label="跳过新手引导">×</button></div>
+ <div class="overview"><div><span class="stat-icon mint"><svg><use href="#i-cup"/></svg></span><section><small>你的最佳</small><strong id="player-best">000</strong><em>分</em></section><span class="stat-sub" id="best-scope">经典 · 入门</span></div><div><span class="stat-icon violet"><svg><use href="#i-brain"/></svg></span><section><small>AI 最佳</small><strong id="ai-best">000</strong><em>分</em></section><span class="stat-sub">同模式 / 难度</span></div><div><span class="stat-icon amber"><svg><use href="#i-chart"/></svg></span><section><small>进化世代</small><strong id="generation-top">00</strong><em>代</em></section><span class="stat-sub" id="evo-top-state">等待第一次进化</span></div><div><span class="stat-icon blue"><svg><use href="#i-grid"/></svg></span><section><small>示范数据</small><strong id="sample-top">000</strong><em>组</em></section><span class="stat-sub">来自你的真实操作</span></div></div>
+ <div class="lab-grid"><div class="game-column"><section class="panel arena-panel"><div class="panel-heading"><h2><span class="status-dot"></span>飞行训练场 <span class="label" id="driver-label">等待起飞</span></h2><button class="help" data-tip="星星 +10 分，存活每秒 +1 分。碰撞扣一条生命，归零结算。禅模式永不死亡。" aria-label="查看计分规则">?</button></div><div class="arena-toolbar"><label>模式 <select id="mode" aria-label="游戏模式"><option value="classic">经典模式</option><option value="survival">生存模式</option><option value="sprint">限时冲刺</option><option value="zen">禅模式</option><option value="daily">每日挑战</option><option value="custom">自定义模式</option></select></label><label>难度 <select id="difficulty" aria-label="难度"><option value="beginner">入门 · 轻松起步</option><option value="normal">普通 · 稳步挑战</option><option value="hard">困难 · 反应考验</option><option value="extreme">极限 · 高手试炼</option></select></label><span class="arena-day" id="daily-date"></span><span class="keyboard-hint"><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> / 方向键</span></div><div class="canvas-wrap"><canvas id="game" width="900" height="540" tabindex="0" aria-label="飞船游戏画布，方向键或 WASD 移动，空格暂停"></canvas><div class="hud"><div><small>本局得分</small><strong id="score">000</strong></div><div class="hud-right"><span id="lives">♡ ♡ ♡</span><small><span id="stars">0</span> 颗星星 <b>·</b> <span id="time">00:00</span></small></div></div><div class="game-message" id="game-message"><div class="live-tag">READY TO EXPLORE</div><h3>第一位老师，就是你</h3><p>移动飞船，靠近星星。你的每个动作都值得学习。</p><button class="primary" id="canvas-start"><svg><use href="#i-play"/></svg>开始我的第一局</button><div class="mini-hint">方向键 / WASD 移动 · 空格暂停</div></div><div class="canvas-bottom"><span><i class="legend-star"></i>星星 +10</span><span><i class="legend-meteor"></i>小心陨石</span><span id="record-status"><i class="record-dot"></i>自动记录示范</span></div></div><div class="game-controls"><button class="primary" id="play"><svg><use href="#i-play"/></svg>开始游戏</button><button class="secondary" id="pause"><svg><use href="#i-pause"/></svg><span>暂停</span></button><button class="icon-button" id="restart" aria-label="重开一局" title="重开一局"><svg><use href="#i-refresh"/></svg></button><button class="text-button" id="finish">结算</button><label class="control-select"><span>操作</span><select id="control" aria-label="操作方式"><option value="keyboard">键盘</option><option value="mouse">鼠标跟随</option><option value="touch">触屏拖动</option></select></label></div><p class="context-note" id="mode-description"></p><div class="daily-score" id="daily-score" hidden></div></section>
+ <section class="panel chart-panel"><div class="panel-heading"><h2>每一代，都有新的可能 <button class="help" data-tip="适应度就是实际游戏得分。每代最佳与平均值可能起伏；在相同评估环境中，历史最佳不会下降。" aria-label="解释适应度曲线">?</button></h2><div class="chart-tabs"><button class="active" data-chart="evolution">进化表现</button><button data-chart="loss">学习损失</button></div></div><div class="chart-legend" id="chart-legend"><span class="mint-dot">历史最佳</span><span class="violet-dot">当代平均</span><span class="dim-dot">当代最佳</span><small id="chart-caption">完成一代后，曲线就会出现在这里</small></div><canvas id="training-chart" width="860" height="175" aria-label="训练表现曲线"></canvas><div class="chart-footer"><span id="chart-axis">横轴：世代 · 纵轴：实际得分</span><span>真实训练数据</span></div></section></div>
+ <div class="inspector"><section class="panel brain-panel"><div class="panel-heading"><h2><svg class="mint"><use href="#i-brain"/></svg>看见 AI 的思考</h2><span class="tiny-status" id="brain-live">实时大脑</span></div><div class="network-labels"><span>感知环境</span><span id="hidden-label">理解信息</span><span>决定行动</span></div><canvas id="network" width="430" height="200" aria-label="神经网络激活值与正负权重实时图"></canvas><div class="network-footer"><span id="network-shape">24 输入 → 10 隐藏 → 5 动作</span><button class="help" data-tip="圆点越亮，神经元越活跃。绿色实线是正权重，紫色虚线是负权重；越粗影响越大。输入节点完整显示。" aria-label="解释神经网络图">?</button></div><div class="action-bars" id="action-bars"></div><details class="heatmap"><summary>查看权重热力图 <span>每个色块，一次连接</span></summary><label>网络层 <select id="heat-layer" aria-label="热力图层"><option value="0">输入 → 隐藏 1</option></select></label><canvas id="heatmap" width="410" height="130" aria-label="选定网络层的权重热力图"></canvas><p>青色 + / 紫色 −；深浅表示绝对值，行是接收节点，列是来源节点。</p></details></section>
+ <section class="panel training-panel"><div class="panel-heading"><h2>选择一种成长方式</h2><span class="label">AI LAB</span></div><div class="training-tabs"><button class="active" data-trainer="evolution">自主进化</button><button data-trainer="imitation">向你学习</button></div><div id="trainer-evolution"><h3>让 AI 自己试出来 <svg><use href="#i-star"/></svg></h3><p>一群小飞船不断尝试。表现好的大脑，会把经验传给下一代。</p><div class="training-stats"><div><small>当前世代</small><strong id="generation">—</strong></div><div><small>种群数量</small><strong id="population">50</strong></div><div><small>当代平均</small><strong id="mean-fitness">—</strong></div></div><div class="fitness-details"><span>当代最佳 <b id="current-fitness">—</b></span><span>历史最佳 <b id="historical-fitness">—</b></span></div><div class="training-progress"><div class="progress-track"><i id="evo-progress"></i></div><span id="evo-progress-text">准备好第一批学员</span></div><div class="evo-actions"><button class="primary full" id="evolve"><svg><use href="#i-play"/></svg><span>开始进化</span></button><select id="speed" aria-label="训练加速"><option value="1">1×</option><option value="4" selected>4×</option><option value="16">16×</option></select></div><button class="secondary full" id="watch"><svg><use href="#i-ship"/></svg>看最佳个体玩 <span>↗</span></button><p class="fineprint">每位学员独立试飞 30 秒，冲刺与每日挑战为 60 秒。<br>加速只改变计算速度，不改变游戏物理。</p></div><div id="trainer-imitation" hidden><h3>教出另一个你 <svg><use href="#i-brain"/></svg></h3><p>先亲手玩一局，再让 AI 学习你的每个选择。示范越丰富，它越有机会学好。</p><div class="training-stats"><div><small>示范样本</small><strong id="samples">0</strong></div><div><small>留出准确率</small><strong id="accuracy">—</strong></div><div><small>训练损失</small><strong id="loss">—</strong></div></div><p class="fineprint" id="imitation-status">建议收集至少 500 个动作样本。准确率在未参与训练的片段上计算。</p><button class="primary full" id="imitate"><svg><use href="#i-brain"/></svg>用我的示范训练</button><button class="secondary full" id="watch-imitation"><svg><use href="#i-play"/></svg>看学员演示</button></div><div class="model-tools"><button id="export">导出大脑 JSON</button><button id="import">导入</button><button id="reset-training">重置训练</button><input id="import-file" type="file" accept=".json,application/json" hidden></div></section></div></div>
+ <div class="bottom-grid"><section class="panel compare-panel"><div class="panel-heading"><h2>老师与学员</h2><svg class="muted"><use href="#i-cup"/></svg></div><div class="compare-row"><span><i class="mint-dot"></i>你的最佳</span><div><i id="human-bar"></i></div><strong id="human-compare">0</strong></div><div class="compare-row ai"><span><i class="violet-dot"></i>AI 最佳</span><div><i id="ai-bar"></i></div><strong id="ai-compare">0</strong></div><p id="compare-caption">第一场教学，从你开始。</p><div class="replay-row"><button class="text-button" id="replay-human">↻ 回放你的最佳</button><button class="text-button" id="replay-ai">↻ 回放 AI 最佳</button></div></section><section class="panel log-panel"><div class="panel-heading"><h2>实验日志</h2><span class="tiny-status"><span class="online-dot"></span>本地</span></div><ol id="log" aria-label="训练日志"><li><time>READY</time><span>训练营已就绪。新的大脑，新的可能。</span></li></ol></section></div>
+ </section>
+ <section class="view" id="view-career" hidden><div class="page-heading"><div class="eyebrow">YOUR LEARNING JOURNEY</div><h1>每一点成长，都算数。</h1><p>你与 AI 的飞行档案，只保存在这台设备上。</p></div><div id="career-stats" class="career-stats"></div><section class="panel wide-panel"><div class="panel-heading"><h2>最近 30 局 · 飞行轨迹</h2><span class="label">真实结算记录</span></div><canvas id="history-chart" width="1000" height="220" aria-label="最近游戏成绩历史"></canvas><div id="history-empty" class="empty-note">完成第一局飞行，留下你的起点。</div></section><section class="panel wide-panel"><div class="panel-heading"><h2>成长徽章</h2><span id="achievement-count" class="label">0 / 6</span></div><div id="achievements" class="achievements"></div></section><section class="panel wide-panel"><div class="panel-heading"><h2>AI 成长曲线</h2><span class="label">各次训练的已完成世代</span></div><canvas id="career-chart" width="1000" height="200" aria-label="AI 生涯成长曲线"></canvas><p class="context-note">不同模式或参数下的成绩不直接可比，详情见每代实验日志。图中记录的是每代真实最佳成绩。</p></section></section>
+ <section class="view" id="view-settings" hidden><div class="page-heading"><div class="eyebrow">TUNE YOUR EXPERIMENT</div><h1>给好奇心，一块实验田。</h1><p>从一颗神经元到一整个种群，让每个参数的影响变得可见。</p></div><div class="settings-notice">游戏参数立即作用于当前局（每日挑战固定规则）；网络和进化参数修改后，下一次训练会建立新的实验。旧冠军仍可导出。</div><div id="settings-groups" class="settings-grid"></div><section class="panel wide-panel"><div class="panel-heading"><h2>自定义预设</h2><span class="label">本机保存</span></div><div class="preset-row"><label>预设名称<input id="preset-name" maxlength="30" placeholder="例如：我的极限训练"></label><button class="primary" id="save-preset">保存当前参数</button><label>已有预设<select id="preset-select" aria-label="选择预设"><option value="">选择一个预设</option></select></label><button class="secondary" id="load-preset">加载并进入自定义</button></div></section><section class="panel wide-panel"><div class="panel-heading"><h2>让界面适合你</h2></div><div class="accessibility"><label><input type="checkbox" id="colorblind"> 色盲友好配色（蓝 / 橙 + 线型区分）</label><label><input type="checkbox" id="large-font"> 放大界面文字</label><label><input type="checkbox" id="reduced-motion"> 减少装饰动画</label></div><p class="context-note">Tab 切换控件，Enter 或空格激活；游戏中方向键 / WASD 移动，空格暂停。切换标签页时自动暂停。</p><p class="context-note" id="storage-status">设置、成绩、示范与大脑定期保存到浏览器本地存储。</p></section></section>
+ <section class="view" id="view-guide" hidden><div class="page-heading"><div class="eyebrow">A LITTLE CURIOSITY GOES A LONG WAY</div><h1>不懂 AI，也能成为它的老师。</h1><p>先玩起来，再一点点理解它如何学习。</p></div><section class="panel tutorial-panel"><div class="panel-heading"><h2>三分钟，认识你的 AI 学员</h2><span class="label" id="lesson-step">1 / 3</span></div><div id="lesson-visual" class="lesson-visual"></div><h3 id="lesson-title"></h3><p id="lesson-text"></p><div class="lesson-actions"><button class="secondary" id="lesson-prev">← 上一课</button><button class="primary" id="lesson-next">下一课 →</button></div></section><div id="rules" class="rules-grid"></div></section>
+ <footer><span><svg><use href="#i-shield"/></svg>本游戏完全离线运行，无广告、无追踪、不联网</span><span>好奇心驱动 · 开源自由分享</span></footer>
+ </main>
+</div>
+<div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+<div id="tooltip" class="tooltip" role="tooltip" hidden></div>
+<script>
+/* Neural Arcade — deterministic game simulation, no DOM and no dependencies. */
+(function (root) {
+  'use strict';
+  const W = 900, H = 540;
+  const DIFFICULTIES = Object.freeze({
+    beginner: Object.freeze({ label: '入门', description: '第一次玩：陨石少且慢，3 条命，有路线与碰撞提示。', density: 0.48, meteorSpeed: 0.58, starCount: 8, lives: 3, assist: true }),
+    normal: Object.freeze({ label: '普通', description: '熟悉操作后：标准节奏，2 条命，适合日常挑战。', density: 1, meteorSpeed: 1, starCount: 6, lives: 2, assist: false }),
+    hard: Object.freeze({ label: '困难', description: '已经熟练：陨石更密更快，只有 1 条命。', density: 1.55, meteorSpeed: 1.35, starCount: 5, lives: 1, assist: false }),
+    extreme: Object.freeze({ label: '极限', description: '挑战高手：高速密集陨石，1 条命，无辅助提示。', density: 2.35, meteorSpeed: 1.8, starCount: 4, lives: 1, assist: false })
+  });
+  const MODES = Object.freeze({
+    classic: Object.freeze({ label: '经典模式', description: '收集星星、躲避陨石，生命耗尽时结算。' }),
+    survival: Object.freeze({ label: '生存模式', description: '没有星星，活得越久越好；生命耗尽时结算。' }),
+    sprint: Object.freeze({ label: '限时冲刺', description: '60 秒抢分；倒计时结束或生命耗尽时结算。' }),
+    zen: Object.freeze({ label: '禅模式', description: '撞击只会弹开，不会死亡；可随时结束并保留示范。' }),
+    daily: Object.freeze({ label: '每日挑战', description: '按 UTC 日期生成同一关，固定普通难度，60 秒挑战。' }),
+    custom: Object.freeze({ label: '自定义模式', description: '调整速度、密度、星星与生命，打造自己的训练场。' })
+  });
+  const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
+  const distance2 = (a, b) => (a.x - b.x) ** 2 + (a.y - b.y) ** 2;
+  function hashSeed(value) {
+    if (typeof value === 'number' && Number.isFinite(value)) return value >>> 0;
+    const text = String(value);
+    let h = 2166136261;
+    for (let i = 0; i < text.length; i++) { h ^= text.charCodeAt(i); h = Math.imul(h, 16777619); }
+    return h >>> 0;
+  }
+  function seedFromDate(date = new Date()) {
+    const text = typeof date === 'string' ? date.slice(0, 10) : date.toISOString().slice(0, 10);
+    return hashSeed('neural-arcade-daily-v1:' + text);
+  }
+  function randomFactory(seed) {
+    let a = seed >>> 0;
+    return () => {
+      a += 0x6D2B79F5;
+      let t = a;
+      t = Math.imul(t ^ (t >>> 15), t | 1);
+      t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+  function numeric(value, fallback, lo, hi, integer = false) {
+    const n = Number(value);
+    if (value == null || !Number.isFinite(n)) return fallback;
+    return integer ? Math.round(clamp(n, lo, hi)) : clamp(n, lo, hi);
+  }
+
+  class Game {
+    constructor(options = {}) {
+      this.width = W; this.height = H;
+      this.mode = MODES[options.mode] ? options.mode : 'classic';
+      this.difficulty = this.mode === 'daily' ? 'normal' : (DIFFICULTIES[options.difficulty] ? options.difficulty : 'beginner');
+      // A supplied seed permits reproducible evaluation and replay on any day.
+      this.seed = hashSeed(options.seed == null ? (this.mode === 'daily' ? seedFromDate() : Date.now()) : options.seed);
+      this.random = randomFactory(this.seed);
+      this.params = Object.assign({}, options.params || {});
+      this.config = this._config();
+      this.maxLives = this.config.lives;
+      this.lives = this.maxLives;
+      const limit = Number(options.maxTime);
+      this.maxTime = this.mode === 'sprint' || this.mode === 'daily' ? 60 : (Number.isFinite(limit) && limit > 0 ? limit : Infinity);
+      // Evaluators can shorten a timed episode, but never extend its deadline.
+      if (Number.isFinite(limit) && limit > 0) this.maxTime = Math.min(this.maxTime, limit);
+      this.ship = { x: W / 2, y: H / 2, vx: 0, vy: 0, r: 12, invincible: 0 };
+      this.stars = []; this.meteors = [];
+      this.time = 0; this.score = 0; this.collected = 0; this.done = false; this.reason = '';
+      this.events = []; this._starId = 0; this._meteorId = 0;
+      this._spawnClock = 0; this._recoil = { x: 0, y: 0 };
+      this._syncStars(true);
+      const initial = { beginner: 2, normal: 4, hard: 6, extreme: 9 }[this.difficulty];
+      for (let i = 0; i < initial; i++) this._spawnMeteor(true);
+    }
+    _config() {
+      const base = DIFFICULTIES[this.difficulty];
+      const p = this.mode === 'daily' ? {} : this.params;
+      return {
+        gameSpeed: numeric(p.gameSpeed, 1, 0.25, 3),
+        density: base.density * numeric(p.density, 1, 0.1, 4),
+        meteorSpeed: base.meteorSpeed * numeric(p.meteorSpeed, 1, 0.2, 3),
+        starCount: this.mode === 'survival' ? 0 : numeric(p.starCount, base.starCount, 0, 20, true),
+        lives: numeric(p.lives, base.lives, 1, 10, true),
+        assist: this.mode !== 'daily' && base.assist
+      };
+    }
+    setParams(params = {}) {
+      const oldMax = this.maxLives;
+      for (const key of ['gameSpeed', 'density', 'meteorSpeed', 'starCount', 'lives']) {
+        if (Object.prototype.hasOwnProperty.call(params, key)) {
+          if (params[key] == null) delete this.params[key];
+          else this.params[key] = params[key];
+        }
+      }
+      const oldSpeed = this.config.meteorSpeed;
+      this.config = this._config(); this.maxLives = this.config.lives;
+      if (!this.done) this.lives = clamp(this.lives + this.maxLives - oldMax, 1, this.maxLives);
+      const ratio = this.config.meteorSpeed / oldSpeed;
+      for (const meteor of this.meteors) { meteor.vx *= ratio; meteor.vy *= ratio; }
+      this._syncStars();
+      return this.config;
+    }
+    setDifficulty(key) {
+      if (!DIFFICULTIES[key] || this.mode === 'daily') return this.config;
+      this.difficulty = key;
+      return this.setParams();
+    }
+    _spawnStar(near = false) {
+      let x = W / 2, y = H / 2;
+      for (let attempt = 0; attempt < 35; attempt++) {
+        if (near) {
+          const angle = this._starId * Math.PI / 2;
+          const radius = 48 + Math.floor(this._starId / 4) * 48;
+          x = clamp(this.ship.x + Math.cos(angle) * radius, 26, W - 26);
+          y = clamp(this.ship.y + Math.sin(angle) * radius, 26, H - 26);
+        } else { x = 26 + this.random() * (W - 52); y = 26 + this.random() * (H - 52); }
+        if (this.meteors.every(m => (x - m.x) ** 2 + (y - m.y) ** 2 > (m.r + 40) ** 2) && this.stars.every(s => (x - s.x) ** 2 + (y - s.y) ** 2 > 28 ** 2)) break;
+        near = false;
+      }
+      this.stars.push({ x, y, r: 10, id: this._starId++ });
+    }
+    _syncStars(initial = false) {
+      if (this.stars.length > this.config.starCount) this.stars.length = this.config.starCount;
+      while (this.stars.length < this.config.starCount) this._spawnStar(initial && this.difficulty === 'beginner' && this.stars.length < 4);
+    }
+    _spawnMeteor(initial = false) {
+      if (this.meteors.length >= 95) return;
+      const side = Math.floor(this.random() * 4);
+      const r = 14 + this.random() * 14;
+      let x, y;
+      const inset = initial ? 16 + this.random() * 35 : -r - 3;
+      if (side === 0) { x = this.random() * W; y = inset; }
+      else if (side === 1) { x = W - inset; y = this.random() * H; }
+      else if (side === 2) { x = this.random() * W; y = H - inset; }
+      else { x = inset; y = this.random() * H; }
+      const aimX = clamp(this.ship.x + (this.random() - 0.5) * W * 0.75, 40, W - 40);
+      const aimY = clamp(this.ship.y + (this.random() - 0.5) * H * 0.75, 40, H - 40);
+      const angle = Math.atan2(aimY - y, aimX - x);
+      const growth = Math.min(1.7, 1 + this.time / 150 + this.collected / 150);
+      const speed = (68 + this.random() * 42) * this.config.meteorSpeed * growth;
+      this.meteors.push({ x, y, vx: Math.cos(angle) * speed, vy: Math.sin(angle) * speed, r, rotation: this.random() * Math.PI * 2, spin: (this.random() - 0.5) * 1.2, id: this._meteorId++ });
+    }
+    step(action = 4, dt = 1 / 30) {
+      this.events = [];
+      if (this.done || !Number.isFinite(dt) || dt <= 0) return this;
+      const chosen = Number.isInteger(action) && action >= 0 && action <= 4 ? action : 4;
+      let remaining = Math.min(dt, 120) * this.config.gameSpeed;
+      while (remaining > 1e-9 && !this.done) {
+        const tick = Math.min(remaining, 1 / 60, this.maxTime - this.time);
+        if (tick <= 1e-9) { this.finish('time'); break; }
+        this._tick(chosen, tick);
+        remaining -= tick;
+      }
+      return this;
+    }
+    _tick(action, dt) {
+      const ship = this.ship;
+      this.time += dt;
+      const directions = [[0, -1], [0, 1], [-1, 0], [1, 0], [0, 0]];
+      const [dx, dy] = directions[action];
+      const speed = 265;
+      ship.vx = dx * speed + this._recoil.x;
+      ship.vy = dy * speed + this._recoil.y;
+      ship.x = clamp(ship.x + ship.vx * dt, ship.r, W - ship.r);
+      ship.y = clamp(ship.y + ship.vy * dt, ship.r, H - ship.r);
+      this._recoil.x *= Math.exp(-dt * 7); this._recoil.y *= Math.exp(-dt * 7);
+      ship.invincible = Math.max(0, ship.invincible - dt);
+      // Time and collection determine difficulty; nothing depends on render frame rate.
+      const growth = Math.min(2.6, 1 + this.time / 100 + this.collected / 70);
+      this._spawnClock += dt * this.config.density * growth;
+      while (this._spawnClock >= 1.1) { this._spawnClock -= 1.1; this._spawnMeteor(); }
+      for (const m of this.meteors) { m.x += m.vx * dt; m.y += m.vy * dt; m.rotation += m.spin * dt; }
+      this.meteors = this.meteors.filter(m => m.x > -90 && m.x < W + 90 && m.y > -90 && m.y < H + 90);
+      for (let i = this.stars.length - 1; i >= 0; i--) {
+        const star = this.stars[i];
+        if (distance2(ship, star) <= (ship.r + star.r) ** 2) {
+          this.stars.splice(i, 1); this.collected++;
+          this.events.push({ type: 'star', x: star.x, y: star.y, time: this.time, collected: this.collected });
+        }
+      }
+      this._syncStars();
+      this.score = this.collected * 10 + Math.floor(this.time + 1e-8);
+      if (ship.invincible <= 0) {
+        for (const m of this.meteors) {
+          if (distance2(ship, m) <= (ship.r + m.r) ** 2) {
+            const angle = Math.atan2(ship.y - m.y, ship.x - m.x);
+            const nx = Math.cos(angle), ny = Math.sin(angle);
+            this._recoil = { x: nx * 340, y: ny * 340 };
+            ship.x = clamp(m.x + nx * (ship.r + m.r + 3), ship.r, W - ship.r);
+            ship.y = clamp(m.y + ny * (ship.r + m.r + 3), ship.r, H - ship.r);
+            ship.invincible = this.difficulty === 'beginner' ? 2 : 1.25;
+            if (this.mode !== 'zen') this.lives--;
+            this.events.push({ type: 'hit', x: ship.x, y: ship.y, time: this.time, lives: this.lives });
+            if (this.lives <= 0 && this.mode !== 'zen') this.finish('collision');
+            break;
+          }
+        }
+      }
+      if (!this.done && this.time >= this.maxTime - 1e-8) { this.time = this.maxTime; this.finish('time'); }
+    }
+    finish(reason = 'stopped') {
+      if (this.done) return;
+      this.done = true; this.reason = reason;
+      this.score = this.collected * 10 + Math.floor(this.time + 1e-8);
+      this.events.push({ type: 'end', reason, time: this.time, score: this.score });
+    }
+    features() {
+      const f = new Float32Array(24), ship = this.ship;
+      const rocks = this.meteors.slice().sort((a, b) => distance2(a, ship) - distance2(b, ship) || a.id - b.id).slice(0, 4);
+      for (let i = 0; i < rocks.length; i++) {
+        const m = rocks[i], j = i * 4;
+        f[j] = clamp((m.x - ship.x) / W, -1, 1);
+        f[j + 1] = clamp((m.y - ship.y) / H, -1, 1);
+        f[j + 2] = clamp(m.vx / 400, -1, 1);
+        f[j + 3] = clamp(m.vy / 400, -1, 1);
+      }
+      const stars = this.stars.slice().sort((a, b) => distance2(a, ship) - distance2(b, ship) || a.id - b.id).slice(0, 2);
+      for (let i = 0; i < stars.length; i++) {
+        f[16 + i * 2] = clamp((stars[i].x - ship.x) / W, -1, 1);
+        f[17 + i * 2] = clamp((stars[i].y - ship.y) / H, -1, 1);
+      }
+      f[20] = ship.x / W * 2 - 1; f[21] = ship.y / H * 2 - 1;
+      f[22] = clamp(ship.vx / 400, -1, 1); f[23] = clamp(ship.vy / 400, -1, 1);
+      return f;
+    }
+    snapshot() {
+      return {
+        width: W, height: H, mode: this.mode, difficulty: this.difficulty, seed: this.seed,
+        time: this.time, score: this.score, collected: this.collected, lives: this.lives,
+        maxLives: this.maxLives, maxTime: Number.isFinite(this.maxTime) ? this.maxTime : null,
+        done: this.done, reason: this.reason, config: Object.assign({}, this.config),
+        ship: Object.assign({}, this.ship), stars: this.stars.map(s => Object.assign({}, s)),
+        meteors: this.meteors.map(m => Object.assign({}, m))
+      };
+    }
+  }
+  Game.W = W; Game.H = H;
+  const Arcade = { Game, DIFFICULTIES, MODES, seedFromDate, W, H };
+  root.Arcade = Arcade;
+  if (typeof module !== 'undefined' && module.exports) module.exports = Arcade;
+})(typeof globalThis !== 'undefined' ? globalThis : this);
+
+/* 神经网络训练营 · 完全手写的前馈网络、交叉熵反向传播与神经进化。
+ * 本文件不依赖第三方库，不访问网络。输入 24 维，动作输出 5 维。
+ * 特征约定：最近 4 个陨石的 dx/dy/vx/vy、最近 2 颗星的 dx/dy、
+ * 飞船的 x/y/vx/vy。不存在的对象由游戏编码器填 0。
+ */
+(function (root) {
+  'use strict';
+
+  const INPUT_SIZE = 24;
+  const OUTPUT_SIZE = 5;
+  const ACTIVATIONS = ['relu', 'tanh', 'sigmoid'];
+  const MAX_PARAMETER = 10000;
+
+  // Mulberry32 + Box-Muller：给定相同种子就得到相同初始化、选择与变异。
+  function createRNG(seed) {
+    let state = 2166136261;
+    const text = String(seed === undefined ? Date.now() : seed);
+    for (let i = 0; i < text.length; i++) {
+      state = Math.imul(state ^ text.charCodeAt(i), 16777619) >>> 0;
+    }
+    const rng = function () {
+      state = (state + 0x6D2B79F5) >>> 0;
+      let t = Math.imul(state ^ (state >>> 15), 1 | state);
+      t ^= t + Math.imul(t ^ (t >>> 7), 61 | t);
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+    rng.normal = function () {
+      const u = Math.max(rng(), 1e-12);
+      return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * rng());
+    };
+    return rng;
+  }
+
+  function architecture(hidden, activation) {
+    if (!Array.isArray(hidden) || hidden.length < 1 || hidden.length > 2 ||
+        !hidden.every(n => Number.isInteger(n) && n >= 4 && n <= 24)) {
+      throw new Error('隐藏层必须是 1～2 层，每层 4～24 个神经元。');
+    }
+    if (!ACTIVATIONS.includes(activation)) throw new Error('不支持的激活函数。');
+    return [INPUT_SIZE].concat(hidden, OUTPUT_SIZE);
+  }
+
+  function activate(value, kind) {
+    if (kind === 'relu') return Math.max(0, value);
+    if (kind === 'tanh') return Math.tanh(value);
+    // 使用两个分支避免 exp(很大的正数) 溢出。
+    return value >= 0 ? 1 / (1 + Math.exp(-value)) : Math.exp(value) / (1 + Math.exp(value));
+  }
+
+  function derivative(value, kind) {
+    if (kind === 'relu') return value > 0 ? 1 : 0;
+    if (kind === 'tanh') return 1 - value * value;
+    return value * (1 - value);
+  }
+
+  function argmax(values) {
+    let result = 0;
+    for (let i = 1; i < values.length; i++) if (values[i] > values[result]) result = i;
+    return result;
+  }
+
+  function checkSample(sample) {
+    if (!sample || !Number.isInteger(sample.y) || sample.y < 0 || sample.y >= OUTPUT_SIZE) {
+      throw new Error('示范动作必须是 0～4 的整数。');
+    }
+  }
+
+  function validNumber(n) {
+    return typeof n === 'number' && Number.isFinite(n) && Math.abs(n) <= MAX_PARAMETER;
+  }
+
+  class Network {
+    constructor(options) {
+      const config = options || {};
+      this.hidden = (config.hidden || [10]).slice();
+      this.activation = config.activation || 'tanh';
+      this.sizes = architecture(this.hidden, this.activation);
+      this.layers = [];
+      this.activations = this.sizes.map(size => new Array(size).fill(0));
+      const rng = createRNG(config.seed);
+      for (let l = 1; l < this.sizes.length; l++) {
+        const fanIn = this.sizes[l - 1];
+        const fanOut = this.sizes[l];
+        const hiddenLayer = l < this.sizes.length - 1;
+        const scale = this.activation === 'relu' && hiddenLayer
+          ? Math.sqrt(2 / fanIn) : Math.sqrt(2 / (fanIn + fanOut));
+        this.layers.push({
+          weights: Array.from({ length: fanOut }, () => Array.from({ length: fanIn }, () => rng.normal() * scale)),
+          biases: new Array(fanOut).fill(0)
+        });
+      }
+    }
+
+    forward(features) {
+      if (!features || features.length !== INPUT_SIZE) throw new Error('游戏状态必须包含 24 个输入特征。');
+      const input = Array.from(features);
+      if (!input.every(Number.isFinite)) throw new Error('输入特征含有无效数字。');
+      this.activations[0] = input;
+      let previous = input;
+      for (let l = 0; l < this.layers.length; l++) {
+        const layer = this.layers[l];
+        const values = new Array(layer.biases.length);
+        for (let j = 0; j < values.length; j++) {
+          let sum = layer.biases[j];
+          for (let i = 0; i < previous.length; i++) sum += layer.weights[j][i] * previous[i];
+          values[j] = l === this.layers.length - 1 ? sum : activate(sum, this.activation);
+        }
+        if (l === this.layers.length - 1) {
+          // 减去最大值不改变 softmax，但能避免指数溢出。
+          const max = Math.max.apply(null, values);
+          let total = 0;
+          for (let j = 0; j < values.length; j++) total += (values[j] = Math.exp(values[j] - max));
+          for (let j = 0; j < values.length; j++) values[j] /= total;
+        }
+        this.activations[l + 1] = values;
+        previous = values;
+      }
+      return previous;
+    }
+
+    predict(features) { return argmax(this.forward(features)); }
+
+    // 真正的 mini-batch SGD：对每条示范计算梯度，求平均，再更新一次。
+    // 交叉熵 + softmax 的输出层梯度正好是 p - oneHot(正确动作)。
+    trainBatch(samples, learningRate) {
+      if (!Array.isArray(samples) || !samples.length) return { loss: 0, accuracy: 0, count: 0 };
+      const rate = learningRate === undefined ? 0.03 : learningRate;
+      if (!Number.isFinite(rate) || rate <= 0 || rate > 1) throw new Error('学习率必须大于 0 且不超过 1。');
+      const gradients = this.layers.map(layer => ({
+        weights: layer.weights.map(row => new Array(row.length).fill(0)),
+        biases: new Array(layer.biases.length).fill(0)
+      }));
+      let loss = 0;
+      let correct = 0;
+      for (const sample of samples) {
+        checkSample(sample);
+        const output = this.forward(sample.x);
+        loss -= Math.log(Math.max(1e-12, output[sample.y]));
+        correct += argmax(output) === sample.y ? 1 : 0;
+        let delta = output.map((p, i) => p - (i === sample.y ? 1 : 0));
+        for (let l = this.layers.length - 1; l >= 0; l--) {
+          const input = this.activations[l];
+          const layer = this.layers[l];
+          const grad = gradients[l];
+          for (let j = 0; j < delta.length; j++) {
+            grad.biases[j] += delta[j];
+            for (let i = 0; i < input.length; i++) grad.weights[j][i] += delta[j] * input[i];
+          }
+          if (l > 0) {
+            const previousDelta = new Array(input.length).fill(0);
+            for (let i = 0; i < input.length; i++) {
+              for (let j = 0; j < delta.length; j++) previousDelta[i] += layer.weights[j][i] * delta[j];
+              previousDelta[i] *= derivative(input[i], this.activation);
+            }
+            delta = previousDelta;
+          }
+        }
+      }
+      // 全局梯度裁剪防止极端输入或大步长导致发散；通常不会触发。
+      let normSquared = 0;
+      for (const grad of gradients) {
+        for (const row of grad.weights) for (const g of row) normSquared += (g / samples.length) ** 2;
+        for (const g of grad.biases) normSquared += (g / samples.length) ** 2;
+      }
+      const scale = rate / samples.length * Math.min(1, 5 / (Math.sqrt(normSquared) || 1));
+      for (let l = 0; l < this.layers.length; l++) {
+        const layer = this.layers[l];
+        const grad = gradients[l];
+        for (let j = 0; j < layer.biases.length; j++) {
+          layer.biases[j] -= scale * grad.biases[j];
+          for (let i = 0; i < layer.weights[j].length; i++) layer.weights[j][i] -= scale * grad.weights[j][i];
+        }
+      }
+      return { loss: loss / samples.length, accuracy: correct / samples.length, count: samples.length };
+    }
+
+    evaluate(samples) {
+      if (!Array.isArray(samples) || !samples.length) return { loss: 0, accuracy: 0, count: 0 };
+      let loss = 0;
+      let correct = 0;
+      for (const sample of samples) {
+        checkSample(sample);
+        const result = this.forward(sample.x);
+        loss -= Math.log(Math.max(1e-12, result[sample.y]));
+        correct += argmax(result) === sample.y ? 1 : 0;
+      }
+      return { loss: loss / samples.length, accuracy: correct / samples.length, count: samples.length };
+    }
+
+    flatten() {
+      const flat = [];
+      for (const layer of this.layers) {
+        for (const row of layer.weights) for (const value of row) flat.push(value);
+        for (const value of layer.biases) flat.push(value);
+      }
+      return flat;
+    }
+
+    setFlat(flat) {
+      const count = this.layers.reduce((n, layer) => n + layer.weights.length * layer.weights[0].length + layer.biases.length, 0);
+      if (!Array.isArray(flat) || flat.length !== count || !flat.every(validNumber)) throw new Error('权重数量或数值无效。');
+      let index = 0;
+      for (const layer of this.layers) {
+        for (const row of layer.weights) for (let i = 0; i < row.length; i++) row[i] = flat[index++];
+        for (let j = 0; j < layer.biases.length; j++) layer.biases[j] = flat[index++];
+      }
+      return this;
+    }
+
+    toJSON() {
+      return {
+        format: 'neural-bootcamp-network', version: 1, inputSize: INPUT_SIZE, outputSize: OUTPUT_SIZE,
+        hidden: this.hidden.slice(), activation: this.activation,
+        layers: this.layers.map(layer => ({ weights: layer.weights.map(row => row.slice()), biases: layer.biases.slice() }))
+      };
+    }
+
+    clone() { return Network.fromJSON(this.toJSON()); }
+
+    static fromJSON(value) {
+      let data = value;
+      if (typeof data === 'string') {
+        if (data.length > 2000000) throw new Error('网络文件过大。');
+        data = JSON.parse(data);
+      }
+      if (!data || data.format !== 'neural-bootcamp-network' || data.version !== 1 ||
+          data.inputSize !== INPUT_SIZE || data.outputSize !== OUTPUT_SIZE) throw new Error('这不是兼容的神经网络训练营权重文件。');
+      const sizes = architecture(data.hidden, data.activation);
+      if (!Array.isArray(data.layers) || data.layers.length !== sizes.length - 1) throw new Error('网络层数不正确。');
+      for (let l = 0; l < data.layers.length; l++) {
+        const layer = data.layers[l];
+        if (!layer || !Array.isArray(layer.weights) || layer.weights.length !== sizes[l + 1] ||
+            !Array.isArray(layer.biases) || layer.biases.length !== sizes[l + 1] || !layer.biases.every(validNumber) ||
+            !layer.weights.every(row => Array.isArray(row) && row.length === sizes[l] && row.every(validNumber))) {
+          throw new Error('网络权重的形状或数值无效。');
+        }
+      }
+      const network = new Network({ hidden: data.hidden, activation: data.activation, seed: 0 });
+      network.layers = data.layers.map(layer => ({ weights: layer.weights.map(row => row.slice()), biases: layer.biases.slice() }));
+      return network;
+    }
+  }
+
+  class Evolution {
+    constructor(options) {
+      const config = options || {};
+      this.populationSize = config.populationSize === undefined ? 50 : config.populationSize;
+      this.mutationRate = config.mutationRate === undefined ? 0.12 : config.mutationRate;
+      this.eliteRatio = config.eliteRatio === undefined ? 0.12 : config.eliteRatio;
+      if (!Number.isInteger(this.populationSize) || this.populationSize < 4 || this.populationSize > 200) throw new Error('种群数量必须是 4～200 的整数。');
+      if (!Number.isFinite(this.mutationRate) || this.mutationRate < 0 || this.mutationRate > 1) throw new Error('变异率必须在 0～1 之间。');
+      if (!Number.isFinite(this.eliteRatio) || this.eliteRatio <= 0 || this.eliteRatio > 0.5) throw new Error('精英比例必须大于 0 且不超过 0.5。');
+      this.hidden = (config.hidden || [10]).slice();
+      this.activation = config.activation || 'tanh';
+      architecture(this.hidden, this.activation);
+      this.rng = createRNG(config.seed);
+      this.generation = 1;
+      this.historicalBest = -Infinity;
+      this.bestNetwork = null;
+      this.population = Array.from({ length: this.populationSize }, () => new Network({
+        hidden: this.hidden, activation: this.activation, seed: Math.floor(this.rng() * 4294967296)
+      }));
+    }
+
+    advance(fitnesses) {
+      if (!Array.isArray(fitnesses) || fitnesses.length !== this.populationSize || !fitnesses.every(Number.isFinite)) {
+        throw new Error('每个个体都需要一个有限的真实对局得分。');
+      }
+      const ranked = this.population.map((network, index) => ({ network, score: fitnesses[index] }))
+        .sort((a, b) => b.score - a.score);
+      const best = ranked[0].score;
+      const mean = fitnesses.reduce((sum, score) => sum + score, 0) / fitnesses.length;
+      if (best > this.historicalBest || !this.bestNetwork) {
+        this.historicalBest = best;
+        this.bestNetwork = ranked[0].network.clone();
+      }
+      const result = {
+        generation: this.generation, best, mean, historicalBest: this.historicalBest,
+        bestNetwork: this.bestNetwork.clone()
+      };
+      // 精英原样复制。若环境种子相同，冠军仍有同样机会取得原先得分。
+      const eliteCount = Math.max(1, Math.floor(this.populationSize * this.eliteRatio));
+      const next = ranked.slice(0, eliteCount).map(entry => entry.network.clone());
+      const tournament = () => {
+        let winner = ranked[Math.floor(this.rng() * ranked.length)];
+        for (let i = 1; i < 3; i++) {
+          const challenger = ranked[Math.floor(this.rng() * ranked.length)];
+          if (challenger.score > winner.score) winner = challenger;
+        }
+        return winner.network;
+      };
+      while (next.length < this.populationSize) {
+        const first = tournament();
+        const a = first.flatten();
+        const b = tournament().flatten();
+        const genes = a.map((value, i) => {
+          let gene = this.rng() < 0.5 ? value : b[i];
+          if (this.rng() < this.mutationRate) gene += this.rng.normal() * 0.35;
+          return Math.max(-MAX_PARAMETER, Math.min(MAX_PARAMETER, gene));
+        });
+        next.push(first.clone().setFlat(genes));
+      }
+      this.population = next;
+      this.generation++;
+      return result;
+    }
+  }
+
+  const Brain = { Network, Evolution, INPUT_SIZE, OUTPUT_SIZE, createRNG };
+  root.Brain = Brain;
+  if (typeof module !== 'undefined' && module.exports) module.exports = Brain;
+})(typeof globalThis !== 'undefined' ? globalThis : window);
+
+/* Chinese interface copy and experiment definitions; no remote resources. */
+globalThis.CampContent = {
+  settingsGroups: [
+    {
+      title: '飞行环境', tag: 'GAME', fields: [
+        { key: 'gameSpeed', label: '游戏速度', type: 'range', min: 0.5, max: 2, step: 0.1, default: 1, unit: '×', help: '改变游戏时间推进速度。慢一点适合练习；每日挑战保持固定规则。' },
+        { key: 'density', label: '陨石密度', type: 'range', min: 0.2, max: 3, step: 0.1, default: 1, unit: '×', help: '数值越大，陨石生成越频繁。密度与速度一起决定躲避压力。' },
+        { key: 'meteorSpeed', label: '陨石速度', type: 'range', min: 0.4, max: 3, step: 0.1, default: 1, unit: '×', help: '调整陨石移动速度。更快的陨石留给你和 AI 的反应时间更少。' },
+        { key: 'starCount', label: '场上星星数量', type: 'range', min: 1, max: 15, step: 1, default: 6, unit: '颗', help: '决定同时出现多少颗星星；生存模式始终没有星星。' },
+        { key: 'lives', label: '起始生命', type: 'range', min: 1, max: 9, step: 1, default: 3, unit: '条', help: '一次有效碰撞扣一条生命，生命归零结算；禅模式不会死亡。' }
+      ]
+    },
+    {
+      title: '神经网络', tag: 'BRAIN', fields: [
+        { key: 'hiddenLayers', label: '隐藏层数', type: 'range', min: 1, max: 2, step: 1, default: 1, unit: '层', help: '隐藏层是输入和动作之间的信息处理环节。更多层不一定学得更好。修改后需要重新训练。' },
+        { key: 'neurons1', label: '第一层神经元', type: 'range', min: 4, max: 24, step: 1, default: 10, unit: '个', help: '这一层有多少个小计算单元。越多能表达的关系越复杂，也需要更多数据与计算。' },
+        { key: 'neurons2', label: '第二层神经元', type: 'range', min: 4, max: 24, step: 1, default: 8, unit: '个', help: '只有选择两层隐藏层时生效。可以先保留默认值。' },
+        { key: 'activation', label: '激活函数', type: 'select', default: 'tanh', help: '给每个神经元加一道弯曲的变换，让网络能学习复杂关系。tanh 是平滑曲线，ReLU 只保留正值，sigmoid 输出 0 到 1。', options: [{ value: 'tanh', label: 'tanh · 平滑且有正负' }, { value: 'relu', label: 'ReLU · 只保留正值' }, { value: 'sigmoid', label: 'sigmoid · 压到 0～1' }] }
+      ]
+    },
+    {
+      title: '自主进化', tag: 'EVOLUTION', fields: [
+        { key: 'populationSize', label: '种群规模', type: 'range', min: 10, max: 150, step: 10, default: 50, unit: '个', help: '每一代有多少个独立大脑。更多个体带来更多尝试，也需要更长评估时间。下次进化生效。' },
+        { key: 'mutationRate', label: '变异概率', type: 'range', min: 0.01, max: 0.8, step: 0.01, default: 0.12, unit: '', help: '每个后代权重被随机扰动的概率；0.12 就是 12%。太低探索慢，太高容易破坏好策略。' },
+        { key: 'eliteRatio', label: '精英保留比例', type: 'range', min: 0.04, max: 0.4, step: 0.02, default: 0.12, unit: '', help: '直接进入下一代的优胜者比例；0.12 就是 12%。保留经验，同时给新个体留出空间。' }
+      ]
+    },
+    {
+      title: '向你学习', tag: 'IMITATION', fields: [
+        { key: 'learningRate', label: '学习率', type: 'range', min: 0.001, max: 0.2, step: 0.001, default: 0.03, unit: '', help: '每次纠正预测时，权重迈多大一步。太大可能来回震荡，太小需要更多轮。' },
+        { key: 'batchSize', label: '小批量大小', type: 'select', default: 32, help: '每看完多少个示范动作，合起来更新一次权重。小批量随机梯度下降简称 SGD。', options: [{ value: 16, label: '16 个样本' }, { value: 32, label: '32 个样本' }, { value: 64, label: '64 个样本' }, { value: 128, label: '128 个样本' }] },
+        { key: 'epochs', label: '训练轮数', type: 'range', min: 5, max: 100, step: 5, default: 30, unit: '轮', help: '完整学习一遍训练样本算一轮。轮数多不保证新局面表现更好，要一起看留出准确率和实际试飞。' }
+      ]
+    }
+  ],
+  rules: [
+    { title: '01 · 这是什么游戏？', html: '<p>驾驶一艘小飞船，收集星星、躲避陨石。你还可以当老师，给一个真正的小型神经网络做示范，或者让一群大脑通过反复试飞自己进化。</p><p>所有学习都在你的浏览器里发生。AI 从随机权重出发，没有预先写好的通关路线。</p>' },
+    { title: '02 · 怎么控制飞船？', html: '<ul><li><strong>键盘：</strong>方向键或 WASD 移动；游戏中空格暂停 / 继续。</li><li><strong>鼠标：</strong>把「操作」切到鼠标跟随，在画布里移动指针。</li><li><strong>手机：</strong>切到触屏拖动，在画布里拖动手指。</li><li>飞船每一步选择上、下、左、右、不动之一；指针和触屏也转换成这五种动作。</li><li>Tab 切换菜单控件，Enter / 空格操作按钮。参数实验室可开启大字号、色盲友好配色和减少动画。</li></ul>' },
+    { title: '03 · 怎么得分和结束？', html: '<ul><li>每颗星星 <strong>+10 分</strong>；每存活一秒 <strong>+1 分</strong>。</li><li>一次有效碰撞扣一条生命，生命归零就结束；一条命时撞一次即结束。</li><li>撞击后有短暂保护，避免同一团陨石连续扣光生命。禅模式只弹开，不会死亡。</li><li>限时冲刺和每日挑战最长 60 秒；也可以用「结算」结束当前局。</li><li>存活越久，陨石压力越大。自己的游戏会自动记录示范；回放不会再次计分。</li></ul>' },
+    { title: '04 · 四种难度怎么选？', html: '<ul><li><strong>入门：</strong>3 条命，陨石少且慢、星星较多，有目标方向提示与碰撞预警圈。适合第一次玩。</li><li><strong>普通：</strong>2 条命，标准节奏。适合已经会控制方向的玩家。</li><li><strong>困难：</strong>1 条命，陨石更多、更快。适合练反应和路线选择。</li><li><strong>极限：</strong>1 条命，高速密集陨石，无辅助。适合高手冲分。</li></ul><p>难度可以随时切换；自定义参数可以改变默认环境。每日挑战固定为普通规则。</p>' },
+    { title: '05 · 六种模式有什么不同？', html: '<ul><li><strong>经典：</strong>吃星星、躲陨石，生命耗尽结算。</li><li><strong>生存：</strong>不出现星星，只看能活多久。</li><li><strong>限时冲刺：</strong>60 秒尽量多拿分，到时或生命耗尽结算。</li><li><strong>禅模式：</strong>不会死，轻松练习；点击「结算」结束。</li><li><strong>每日挑战：</strong>UTC 日期决定固定种子，固定普通难度，挑战 60 秒。同一天初始布局与生成规则相同，操作会影响后续状态；只记录本机成绩。</li><li><strong>自定义：</strong>调整游戏与训练参数，保存自己的预设。</li></ul>' },
+    { title: '06 · 我能怎么和 AI 一起玩？', html: '<p>先点「开始游戏」亲手示范，之后用「向你学习」训练；或者直接点「开始进化」，让它自己探索。训练时随时可以回到手动游戏，补充新示范。</p><p>「老师与学员」比较相同模式、难度与环境下的成绩。改变环境后，旧分数不能直接代表谁更强。点最佳回放可以重看已经记录的精彩一局；回放录制有长度上限。</p>' },
+    { title: '07 · 神经网络到底是什么？', html: '<p>把它想成一组可调的「小开关」：输入告诉它附近有什么，每层把数字乘上权重、相加，再做一次变换，最后输出往哪里走。</p><p>这个大脑接收 <strong>24 个状态数字</strong>：附近陨石的位置与速度、星星的位置、飞船的位置与速度。经过 1～2 个隐藏层后，为上、下、左、右、不动给出 5 个分数。训练就是调整连接权重，让选择更合适。</p><p>结构图的圆点表示神经元，亮度表示激活值。连线粗细表示权重绝对值，颜色和线型区分正负。热力图把同一层的权重排成色块矩阵。</p>' },
+    { title: '08 · 两种学习方式怎么工作？', html: '<p><strong>神经进化：</strong>一群随机大脑各玩一局，真实分数就是「适应度」。保留优胜者，用锦标赛选择父代，把权重交叉混合，再随机变异，组成下一代。普通评估最多 30 秒，冲刺和每日挑战最多 60 秒；加速只减少等待，不改变物理规则。</p><p><strong>模仿学习：</strong>记录你的状态与动作，用反向传播找出预测误差来自哪些权重，再用小批量 SGD 一点点更新。训练损失 loss 越低，表示在训练数据上预测得更贴近示范；留出准确率检查没有参与更新的样本。</p><p>样本太少或动作单一，很难学像。丰富示范比重复站着更有用。训练曲线展示真实计算，平均分和 loss 可能起伏，不保证每代都变好。最终请用实际试飞检查效果。</p>' },
+    { title: '09 · 成就怎样解锁？', html: '<ul><li><strong>第一次闪耀：</strong>手动一局达到 100 分。</li><li><strong>完整的航程：</strong>在限时冲刺或每日挑战中坚持到计时结束。</li><li><strong>第一位老师：</strong>累计提供 500 个示范样本。</li><li><strong>十代的耐心：</strong>完成第 10 代神经进化。</li><li><strong>青出于蓝：</strong>同一比较环境下，AI 最佳超过你非零的最佳成绩。</li><li><strong>极限领航员：</strong>手动在标准极限规则达到 500 分。</li></ul><p>成就与生涯统计保存在当前浏览器。清除浏览器数据会清除这些记录。</p>' },
+    { title: '10 · 离线、隐私与开源', html: '<p><strong>本游戏完全离线运行，无广告、无弹窗、无追踪、不联网。</strong>新手提示、教程、工具提示与成就通知都显示在页面内，不打开广告窗口或跳转第三方页面。</p><p>游戏没有服务器、数据库、机器学习库或第三方 SDK，也不发送网络请求。设置、成绩、样本和大脑只保存在本机浏览器。训练好的权重可主动导出为 JSON 备份；导入不会上传文件。</p><p>直接保存 HTML 文件即可断网重开。无痕模式或浏览器限制可能影响本地保存。项目采用 MIT 许可，允许复制、修改和再分发，分发时保留许可声明。</p>' },
+    { title: '11 · 界面按钮速览', html: '<ul><li><strong>开始游戏 / 开始我的第一局：</strong>亲自驾驶并记录示范。</li><li><strong>模式 / 难度 / 操作：</strong>选择玩法、挑战强度与控制方式。</li><li><strong>暂停：</strong>暂时停止当前活动，再次操作继续。</li><li><strong>重开（环形箭头）：</strong>重新开始一局；需要保留当前局成绩时先点「结算」。</li><li><strong>结算：</strong>结束当前局并查看成绩，也用于结束禅模式。</li><li><strong>去练习场：</strong>进入轻松的禅模式。</li><li><strong>开始进化：</strong>创建种群，开始按真实得分选育。</li><li><strong>1× / 4× / 16×：</strong>调整训练推进速度。</li><li><strong>看最佳个体玩：</strong>让进化冠军驾驶并显示大脑活动。</li><li><strong>自主进化 / 向你学习：</strong>切换两种训练面板。</li><li><strong>用我的示范训练：</strong>利用本机样本进行模仿学习。</li><li><strong>看学员演示：</strong>让模仿学习得到的大脑试飞。</li><li><strong>导出大脑 JSON / 导入：</strong>保存权重文件或载入兼容的大脑。</li><li><strong>重置训练：</strong>重新开始大脑训练实验。</li><li><strong>进化表现 / 学习损失：</strong>切换真实训练曲线。</li><li><strong>查看权重热力图 / 网络层：</strong>展开矩阵，选择要观察的层。</li><li><strong>回放你的最佳 / 回放 AI 最佳：</strong>播放已录制的一局，不增加统计。</li><li><strong>学习档案：</strong>查看最近分数、生涯数据、AI 成长和成就。</li><li><strong>参数实验室：</strong>调整环境、网络和两种训练的参数。</li><li><strong>保存当前参数 / 加载并进入自定义：</strong>保存或复用自定义预设。</li><li><strong>游戏指南 / 新手教程：</strong>查看规则或逐步学习输入、输出、训练。</li><li><strong>问号：</strong>悬停、聚焦或点击，查看这个功能的白话解释。</li><li><strong>下一步 / 跳过：</strong>继续或关闭页面内的新手引导。</li></ul>' }
+  ],
+  lessons: [
+    {
+      title: '第一课：输入，是把画面变成数字',
+      text: '想象一颗星星在飞船右边 80 像素、同样高度：相对位置就是「右 80，上下 0」。网络不会直接看屏幕，它接收经过缩放的位置和速度，共 24 个数字。附近陨石怎么移动，也会成为输入。',
+      boxes: [{ strong: '星星在右边', small: '相对位置：+80，0 像素' }, { strong: '变成数字', small: '位置和速度缩放到合适范围' }, { strong: '24 个输入', small: '环境信息送进大脑' }]
+    },
+    {
+      title: '第二课：输出，是选择下一步往哪走',
+      text: '输入经过带权重的连接，隐藏层把信息组合起来。最后，大脑给上、下、左、右、不动分别打分。假设这一刻「向右」最高，飞船就向右走一步；下一步会重新观察。刚开始权重随机，它不一定选对。',
+      boxes: [{ strong: '读取输入', small: '例如：星星在右边' }, { strong: '经过连接', small: '相乘、相加，再做变换' }, { strong: '选择动作', small: '假设右最高 → 向右一步' }]
+    },
+    {
+      title: '第三课：训练，是逐步调整连接的权重',
+      text: '进化靠真实游戏分数挑选更好的大脑；模仿学习用你选的动作纠正预测。如果示范是向右，网络给向右的概率为 p，这个样本的交叉熵就是 −ln(p)：概率越接近 1，误差越小。面板的 loss 来自实际训练计算，这里不预设下降结果。',
+      boxes: [{ strong: '得到反馈', small: '游戏得分，或你的示范动作' }, { strong: '调整权重', small: '进化选育 / 反向传播更新' }, { strong: '重新试飞', small: '看真实分数和留出准确率' }]
+    }
+  ],
+  introSteps: [
+    { title: '先动起来，方向由你决定', text: '方向键或 WASD 移动。手机玩家在「操作」里选择触屏拖动，也可以选择鼠标跟随。' },
+    { title: '靠近星星，就有收获', text: '碰到一颗星星加 10 分，存活每秒再加 1 分。选择入门难度，先轻松拿到第一颗。' },
+    { title: '看到陨石，留一点距离', text: '陨石从边缘飞来，撞到会扣一条命。入门有 3 条命与预警圈；禅模式不会死，适合练手。' },
+    { title: '三个按钮，开始你的训练营', text: '「开始游戏」亲手示范；「开始进化」让 AI 自己探索；「用我的示范训练」让它学你的操作。任何时候都可以暂停。' }
+  ],
+  achievements: [
+    { id: 'first100', title: '第一次闪耀', description: '手动一局达到 100 分' },
+    { id: 'firstFinish', title: '完整的航程', description: '在限时冲刺或每日挑战中坚持到计时结束' },
+    { id: 'teacher500', title: '第一位老师', description: '累计提供 500 个示范样本' },
+    { id: 'evo10', title: '十代的耐心', description: '完成第 10 代神经进化' },
+    { id: 'aiWins', title: '青出于蓝', description: '同一环境下，AI 最佳超过你非零的最佳成绩' },
+    { id: 'extreme500', title: '极限领航员', description: '手动在标准极限规则达到 500 分' }
+  ]
+};
+
+/* Canvas renderers: draw supplied state only. No dependencies, fetching or hidden UI. */
+(function (root) {
+  'use strict';
+  const TAU = Math.PI * 2;
+  const dimensions = new WeakMap();
+  const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
+  const hash = (value) => {
+    let x = (value + 1) | 0;
+    x = Math.imul(x ^ (x >>> 16), 0x45d9f3b);
+    x = Math.imul(x ^ (x >>> 16), 0x45d9f3b);
+    return ((x ^ (x >>> 16)) >>> 0) / 4294967296;
+  };
+  function palette(colorblind) {
+    return colorblind
+      ? { positive: '#80bfff', negative: '#f6c86e', ship: '#9bdfff', star: '#f7d682', positiveRGB: '128,191,255', negativeRGB: '246,200,110' }
+      : { positive: '#6de7bd', negative: '#ac94ed', ship: '#83efd1', star: '#f0ce7c', positiveRGB: '109,231,189', negativeRGB: '172,148,237' };
+  }
+  function prepare(canvas) {
+    if (!canvas || !canvas.getContext) return null;
+    const context = canvas.getContext('2d');
+    if (!context) return null;
+    const previous = dimensions.get(canvas);
+    const rect = canvas.getBoundingClientRect ? canvas.getBoundingClientRect() : {};
+    const w = Math.max(1, rect.width || canvas.clientWidth || (previous && previous.w) || canvas.width || 300);
+    const h = Math.max(1, rect.height || canvas.clientHeight || (previous && previous.h) || canvas.height || 150);
+    const dpr = clamp(root.devicePixelRatio || 1, 1, 2);
+    const pixelW = Math.round(w * dpr), pixelH = Math.round(h * dpr);
+    if (canvas.width !== pixelW) canvas.width = pixelW;
+    if (canvas.height !== pixelH) canvas.height = pixelH;
+    dimensions.set(canvas, { w, h });
+    context.setTransform(dpr, 0, 0, dpr, 0, 0);
+    context.clearRect(0, 0, w, h);
+    context.lineCap = 'round'; context.lineJoin = 'round';
+    context.setLineDash([]); context.globalAlpha = 1;
+    return { ctx: context, w, h };
+  }
+  function circle(ctx, x, y, r) { ctx.beginPath(); ctx.arc(x, y, Math.max(0, r), 0, TAU); }
+  function glow(ctx, x, y, r, color) {
+    const g = ctx.createRadialGradient(x, y, 0, x, y, r);
+    g.addColorStop(0, color); g.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = g; ctx.fillRect(x - r, y - r, r * 2, r * 2);
+  }
+  function game(canvas, state, options = {}) {
+    const p = prepare(canvas); if (!p || !state || !state.ship) return;
+    const { ctx, w, h } = p;
+    const colors = palette(options.colorblind);
+    const worldW = state.width || 900, worldH = state.height || 540;
+    const animated = !options.reducedMotion && !options.paused;
+    const clock = animated && Number.isFinite(options.clock) ? options.clock : (state.time || 0);
+    ctx.save(); ctx.scale(w / worldW, h / worldH);
+    const background = ctx.createLinearGradient(0, 0, worldW, worldH);
+    background.addColorStop(0, '#0b1924'); background.addColorStop(0.48, '#0a1720'); background.addColorStop(1, '#0c1523');
+    ctx.fillStyle = background; ctx.fillRect(0, 0, worldW, worldH);
+    glow(ctx, worldW * 0.54, worldH * 0.48, 340, 'rgba(37,89,80,.11)');
+    glow(ctx, worldW * 0.04, worldH * 0.92, 235, 'rgba(36,72,102,.12)');
+    glow(ctx, worldW * 0.94, worldH * 0.09, 230, 'rgba(71,56,110,.07)');
+    ctx.strokeStyle = '#315062'; ctx.globalAlpha = 0.13; ctx.lineWidth = 0.7;
+    ctx.beginPath();
+    for (let x = 0; x <= worldW; x += 45) { ctx.moveTo(x, 0); ctx.lineTo(x, worldH); }
+    for (let y = 0; y <= worldH; y += 45) { ctx.moveTo(0, y); ctx.lineTo(worldW, y); }
+    ctx.stroke(); ctx.globalAlpha = 1;
+    // A fixed sparse star field avoids distracting background motion while playing.
+    for (let i = 0; i < 145; i++) {
+      const x = hash(i * 7 + 1) * worldW, y = hash(i * 7 + 2) * worldH;
+      const size = hash(i * 7 + 3) > 0.9 ? 1.35 : 0.65;
+      const alpha = 0.14 + hash(i * 7 + 4) * 0.31 + (animated ? Math.sin(clock * 0.5 + i) * 0.045 : 0);
+      ctx.fillStyle = 'rgba(184,216,228,' + alpha.toFixed(3) + ')';
+      circle(ctx, x, y, size); ctx.fill();
+      if (i % 29 === 0) {
+        ctx.strokeStyle = 'rgba(163,204,218,.19)'; ctx.lineWidth = 0.65;
+        ctx.beginPath(); ctx.moveTo(x - 3, y); ctx.lineTo(x + 3, y); ctx.moveTo(x, y - 3); ctx.lineTo(x, y + 3); ctx.stroke();
+      }
+    }
+    // Small corner marks define the play area without an extra HUD overlay.
+    ctx.strokeStyle = 'rgba(107,169,164,.32)'; ctx.lineWidth = 1.2;
+    for (const [cx, cy, sx, sy] of [[17, 17, 1, 1], [worldW - 17, 17, -1, 1], [17, worldH - 17, 1, -1], [worldW - 17, worldH - 17, -1, -1]]) {
+      ctx.beginPath(); ctx.moveTo(cx + 12 * sx, cy); ctx.lineTo(cx, cy); ctx.lineTo(cx, cy + 12 * sy); ctx.stroke();
+    }
+    const originalShip = state.ship;
+    const ship = Object.assign({}, originalShip);
+    if (options.idle && animated) ship.y += Math.sin(clock * 1.6) * 4;
+    const stars = state.stars || [], meteors = state.meteors || [];
+    const assisted = options.assist !== false && state.config && state.config.assist && state.difficulty !== 'extreme';
+    if (assisted && stars.length) {
+      let nearest = stars[0], bestDistance = Infinity;
+      for (const star of stars) {
+        const distance = Math.hypot(star.x - ship.x, star.y - ship.y);
+        if (distance < bestDistance) { bestDistance = distance; nearest = star; }
+      }
+      const angle = Math.atan2(nearest.y - ship.y, nearest.x - ship.x);
+      ctx.strokeStyle = 'rgba(' + colors.positiveRGB + ',.23)'; ctx.lineWidth = 1.1; ctx.setLineDash([2, 7]);
+      ctx.beginPath(); ctx.moveTo(ship.x + Math.cos(angle) * 27, ship.y + Math.sin(angle) * 27);
+      ctx.lineTo(nearest.x - Math.cos(angle) * 17, nearest.y - Math.sin(angle) * 17); ctx.stroke(); ctx.setLineDash([]);
+      ctx.strokeStyle = 'rgba(240,206,124,.15)'; circle(ctx, nearest.x, nearest.y, 20); ctx.stroke();
+    }
+    if (options.target && Number.isFinite(options.target.x) && Number.isFinite(options.target.y)) {
+      const tx = options.target.x, ty = options.target.y;
+      ctx.strokeStyle = 'rgba(' + colors.positiveRGB + ',.24)'; ctx.lineWidth = 1;
+      circle(ctx, tx, ty, 9); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(tx - 14, ty); ctx.lineTo(tx - 11, ty); ctx.moveTo(tx + 11, ty); ctx.lineTo(tx + 14, ty);
+      ctx.moveTo(tx, ty - 14); ctx.lineTo(tx, ty - 11); ctx.moveTo(tx, ty + 11); ctx.lineTo(tx, ty + 14); ctx.stroke();
+    }
+    for (const star of stars) {
+      const pulse = animated ? 1 + Math.sin(clock * 2.3 + star.id * 1.7) * 0.08 : 1;
+      glow(ctx, star.x, star.y, 25, 'rgba(239,193,89,.13)');
+      ctx.save(); ctx.translate(star.x, star.y); ctx.scale(pulse, pulse);
+      ctx.fillStyle = colors.star; ctx.strokeStyle = '#ffe6a4'; ctx.lineWidth = 0.8;
+      ctx.beginPath(); ctx.moveTo(0, -10); ctx.lineTo(2.8, -2.8); ctx.lineTo(10, 0); ctx.lineTo(2.8, 2.8);
+      ctx.lineTo(0, 10); ctx.lineTo(-2.8, 2.8); ctx.lineTo(-10, 0); ctx.lineTo(-2.8, -2.8); ctx.closePath(); ctx.fill(); ctx.stroke();
+      ctx.fillStyle = '#fff0c4'; circle(ctx, 0, 0, 1.7); ctx.fill(); ctx.restore();
+    }
+    for (const meteor of meteors) {
+      const m = meteor;
+      const speed = Math.hypot(m.vx, m.vy), tail = clamp(speed * 0.27, 14, 65);
+      if (speed > 1) {
+        const tx = m.x - m.vx / speed * tail, ty = m.y - m.vy / speed * tail;
+        const trail = ctx.createLinearGradient(tx, ty, m.x, m.y);
+        trail.addColorStop(0, 'rgba(116,130,154,0)'); trail.addColorStop(1, 'rgba(116,130,154,.1)');
+        ctx.strokeStyle = trail; ctx.lineWidth = m.r * 0.95;
+        ctx.beginPath(); ctx.moveTo(tx, ty); ctx.lineTo(m.x, m.y); ctx.stroke();
+      }
+      if (assisted && Math.hypot(m.x - ship.x, m.y - ship.y) < m.r + 128) {
+        ctx.strokeStyle = 'rgba(246,191,110,.45)'; ctx.lineWidth = 1.1; ctx.setLineDash([4, 5]);
+        circle(ctx, m.x, m.y, m.r + 18); ctx.stroke(); ctx.setLineDash([]);
+      }
+      ctx.save(); ctx.translate(m.x, m.y); ctx.rotate(m.rotation || 0);
+      const n = 7 + Math.floor(hash(m.id * 13) * 3);
+      ctx.beginPath();
+      for (let j = 0; j < n; j++) {
+        const angle = j / n * TAU, r = m.r * (0.79 + hash(m.id * 23 + j + 4) * 0.25);
+        if (j === 0) ctx.moveTo(Math.cos(angle) * r, Math.sin(angle) * r);
+        else ctx.lineTo(Math.cos(angle) * r, Math.sin(angle) * r);
+      }
+      ctx.closePath();
+      const rock = ctx.createLinearGradient(-m.r, -m.r, m.r, m.r);
+      rock.addColorStop(0, '#42505f'); rock.addColorStop(0.45, '#303e4c'); rock.addColorStop(1, '#202c39');
+      ctx.fillStyle = rock; ctx.strokeStyle = '#5b6877'; ctx.lineWidth = 1.2; ctx.fill(); ctx.stroke();
+      ctx.strokeStyle = 'rgba(134,149,164,.24)'; ctx.lineWidth = 0.8;
+      ctx.beginPath(); ctx.moveTo(-m.r * 0.53, -m.r * 0.47); ctx.lineTo(-m.r * 0.06, -m.r * 0.66); ctx.lineTo(m.r * 0.3, -m.r * 0.46); ctx.stroke();
+      for (let j = 0; j < 2; j++) {
+        const cx = (hash(m.id * 31 + j * 3 + 1) - 0.5) * m.r;
+        const cy = (hash(m.id * 31 + j * 3 + 2) - 0.5) * m.r;
+        const cr = m.r * (0.12 + hash(m.id * 31 + j * 3 + 3) * 0.1);
+        ctx.fillStyle = 'rgba(8,19,29,.28)'; circle(ctx, cx, cy, cr); ctx.fill();
+        ctx.strokeStyle = 'rgba(144,158,170,.15)'; ctx.beginPath(); ctx.arc(cx, cy, cr, 0, Math.PI * 0.9); ctx.stroke();
+      }
+      ctx.restore();
+    }
+    glow(ctx, ship.x, ship.y, 66, 'rgba(' + colors.positiveRGB + ',.11)');
+    if (ship.invincible > 0) {
+      ctx.strokeStyle = 'rgba(' + colors.positiveRGB + ',.65)'; ctx.lineWidth = 1.2;
+      ctx.setLineDash([9, 6]); circle(ctx, ship.x, ship.y, 27 + Math.sin(clock * 7) * 1.5); ctx.stroke(); ctx.setLineDash([]);
+    } else {
+      ctx.strokeStyle = 'rgba(' + colors.positiveRGB + ',.17)'; ctx.lineWidth = 0.8;
+      circle(ctx, ship.x, ship.y, 28); ctx.stroke();
+    }
+    const moving = Math.hypot(ship.vx || 0, ship.vy || 0) > 8;
+    const direction = moving ? Math.atan2(ship.vy, ship.vx) + Math.PI / 2 : 0;
+    ctx.save(); ctx.translate(ship.x, ship.y); ctx.rotate(direction);
+    const exhaustLength = (moving ? 23 : 12) + (animated ? Math.sin(clock * 28) * 3 : 0);
+    const exhaust = ctx.createLinearGradient(0, 9, 0, 9 + exhaustLength);
+    exhaust.addColorStop(0, 'rgba(' + colors.positiveRGB + ',.75)'); exhaust.addColorStop(1, 'rgba(' + colors.positiveRGB + ',0)');
+    ctx.fillStyle = exhaust; ctx.beginPath(); ctx.moveTo(-4.5, 9); ctx.quadraticCurveTo(-5, 15, 0, 9 + exhaustLength);
+    ctx.quadraticCurveTo(5, 15, 4.5, 9); ctx.closePath(); ctx.fill();
+    const body = ctx.createLinearGradient(-9, 10, 7, -14);
+    body.addColorStop(0, '#386b65'); body.addColorStop(1, colors.ship);
+    ctx.fillStyle = body; ctx.strokeStyle = '#b2f6e3'; ctx.lineWidth = 1.2;
+    ctx.beginPath(); ctx.moveTo(0, -17); ctx.lineTo(12, 12); ctx.lineTo(0, 6); ctx.lineTo(-12, 12); ctx.closePath(); ctx.fill(); ctx.stroke();
+    ctx.fillStyle = '#d3fff2'; ctx.beginPath(); ctx.moveTo(0, -9); ctx.lineTo(3.2, 2); ctx.lineTo(-3.2, 2); ctx.closePath(); ctx.fill();
+    ctx.strokeStyle = 'rgba(197,255,238,.38)'; ctx.lineWidth = 0.7;
+    ctx.beginPath(); ctx.moveTo(0, 6); ctx.lineTo(0, 12); ctx.stroke(); ctx.restore();
+    // Vignette stays beneath DOM labels and emphasizes the playable center.
+    const vignette = ctx.createRadialGradient(worldW / 2, worldH / 2, worldH * 0.28, worldW / 2, worldH / 2, worldW * 0.63);
+    vignette.addColorStop(0, 'rgba(5,10,17,0)'); vignette.addColorStop(1, 'rgba(5,10,17,.3)');
+    ctx.fillStyle = vignette; ctx.fillRect(0, 0, worldW, worldH);
+    ctx.restore();
+  }
+  function network(canvas, model, options = {}) {
+    const p = prepare(canvas); if (!p || !model || !model.sizes || !model.layers) return;
+    const { ctx, w, h } = p, colors = palette(options.colorblind);
+    const left = w < 300 ? 23 : 33, right = w - 47, top = 9, bottom = h - 10;
+    const sizes = model.sizes;
+    const points = sizes.map((size, layer) => Array.from({ length: size }, (_, i) => ({
+      x: left + (right - left) * layer / (sizes.length - 1),
+      y: size === 1 ? (top + bottom) / 2 : top + (bottom - top) * i / (size - 1)
+    })));
+    let maxWeight = 0.1;
+    for (const layer of model.layers) for (const row of layer.weights) for (const value of row) maxWeight = Math.max(maxWeight, Math.abs(value));
+    // Every edge is drawn; color AND dash pattern encode its sign accessibly.
+    for (let layer = 0; layer < model.layers.length; layer++) {
+      for (let out = 0; out < model.layers[layer].weights.length; out++) {
+        const row = model.layers[layer].weights[out];
+        for (let input = 0; input < row.length; input++) {
+          const weight = row[input], strength = Math.sqrt(Math.abs(weight) / maxWeight);
+          const from = points[layer][input], to = points[layer + 1][out];
+          ctx.strokeStyle = 'rgba(' + (weight >= 0 ? colors.positiveRGB : colors.negativeRGB) + ',' + (0.055 + strength * 0.24).toFixed(3) + ')';
+          ctx.lineWidth = 0.3 + strength * 1.35; ctx.setLineDash(weight >= 0 ? [] : [2, 3]);
+          ctx.beginPath(); ctx.moveTo(from.x, from.y); ctx.lineTo(to.x, to.y); ctx.stroke();
+        }
+      }
+    }
+    ctx.setLineDash([]);
+    let selected = 0;
+    const output = model.activations && model.activations[sizes.length - 1] || [];
+    for (let i = 1; i < output.length; i++) if (output[i] > output[selected]) selected = i;
+    for (let layer = 0; layer < sizes.length; layer++) {
+      const activations = model.activations && model.activations[layer] || [];
+      const maxActivation = Math.max(1, ...activations.map(v => Math.abs(v)));
+      for (let node = 0; node < sizes[layer]; node++) {
+        const point = points[layer][node];
+        const value = Number.isFinite(activations[node]) ? activations[node] : 0;
+        const strength = clamp(Math.abs(value) / maxActivation, 0, 1);
+        const last = layer === sizes.length - 1;
+        const radius = layer === 0 ? 2.65 : (sizes[layer] > 14 ? 3.1 : last ? 5.6 : 4.6);
+        const rgb = value >= 0 ? colors.positiveRGB : colors.negativeRGB;
+        if (strength > 0.3 || (last && node === selected)) glow(ctx, point.x, point.y, radius * 2.8, 'rgba(' + rgb + ',.11)');
+        ctx.fillStyle = '#121d28'; circle(ctx, point.x, point.y, radius + 0.8); ctx.fill();
+        ctx.fillStyle = 'rgba(' + rgb + ',' + (0.16 + strength * 0.74).toFixed(3) + ')';
+        ctx.strokeStyle = 'rgba(' + rgb + ',' + (0.4 + strength * 0.6).toFixed(3) + ')'; ctx.lineWidth = last && node === selected ? 1.5 : 0.8;
+        circle(ctx, point.x, point.y, radius); ctx.fill(); ctx.stroke();
+        if (last) {
+          ctx.font = '10px "Segoe UI", "Microsoft YaHei", sans-serif'; ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
+          ctx.fillStyle = node === selected ? colors.positive : '#7e8d9f';
+          ctx.fillText(['上', '下', '左', '右', '停'][node] || String(node), point.x + 12, point.y);
+        }
+      }
+    }
+  }
+  function heatmap(canvas, model, layerIndex = 0, options = {}) {
+    const p = prepare(canvas); if (!p || !model || !model.layers || !model.layers.length) return;
+    const { ctx, w, h } = p, colors = palette(options.colorblind);
+    const index = clamp(Math.round(Number(layerIndex) || 0), 0, model.layers.length - 1);
+    const weights = model.layers[index].weights, rows = weights.length, cols = weights[0].length;
+    const left = 18, top = 9, right = w - 12, bottom = h - 18;
+    const cellW = (right - left) / cols, cellH = (bottom - top) / rows;
+    let maxWeight = 0.01;
+    for (const row of weights) for (const value of row) maxWeight = Math.max(maxWeight, Math.abs(value));
+    for (let row = 0; row < rows; row++) {
+      for (let col = 0; col < cols; col++) {
+        const value = weights[row][col], alpha = 0.08 + Math.abs(value) / maxWeight * 0.82;
+        ctx.fillStyle = 'rgba(' + (value >= 0 ? colors.positiveRGB : colors.negativeRGB) + ',' + alpha.toFixed(3) + ')';
+        const x = left + col * cellW, y = top + row * cellH;
+        ctx.fillRect(x, y, Math.max(1, cellW - 1.3), Math.max(1, cellH - 1.3));
+        if (options.colorblind && cellW >= 7 && cellH >= 7) {
+          ctx.fillStyle = 'rgba(9,16,23,.75)'; ctx.font = '7px monospace'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+          ctx.fillText(value >= 0 ? '+' : '−', x + (cellW - 1.3) / 2, y + (cellH - 1.3) / 2);
+        }
+      }
+    }
+    ctx.font = '8px Consolas, monospace'; ctx.textBaseline = 'middle'; ctx.fillStyle = '#738195'; ctx.textAlign = 'right';
+    ctx.fillText('1', left - 5, top + cellH / 2); ctx.fillText(String(rows), left - 5, bottom - cellH / 2);
+    ctx.textAlign = 'center'; ctx.fillText('1', left + cellW / 2, bottom + 10); ctx.fillText(String(cols), right - cellW / 2, bottom + 10);
+  }
+  function numberLabel(value, span) {
+    if (Math.abs(value) >= 10000) return (value / 1000).toFixed(0) + 'k';
+    if (span < 1) return value.toFixed(2);
+    if (span < 10 && Math.abs(value % 1) > 1e-8) return value.toFixed(1);
+    return String(Math.round(value));
+  }
+  function chart(canvas, series = [], options = {}) {
+    const p = prepare(canvas); if (!p) return;
+    const { ctx, w, h } = p, colors = palette(options.colorblind);
+    const left = w < 360 ? 36 : 43, right = w - 20, top = options.yLabel ? 23 : 12, bottom = h - 25;
+    const validSeries = Array.isArray(series) ? series : [];
+    const data = [];
+    let maxLength = 0;
+    for (const item of validSeries) {
+      if (!Array.isArray(item.values)) continue;
+      maxLength = Math.max(maxLength, item.values.length);
+      for (const value of item.values) if (Number.isFinite(value)) data.push(value);
+    }
+    let min = data.length ? Math.min(0, ...data) : 0;
+    let max = data.length ? Math.max(0, ...data) : 1;
+    if (max === min) max = min + 1;
+    const rawStep = (max - min) / 4, magnitude = 10 ** Math.floor(Math.log10(rawStep));
+    const fraction = rawStep / magnitude;
+    const step = (fraction <= 1 ? 1 : fraction <= 2 ? 2 : fraction <= 2.5 ? 2.5 : fraction <= 5 ? 5 : 10) * magnitude;
+    min = Math.floor(min / step) * step; max = Math.ceil(max / step) * step;
+    const span = max - min;
+    ctx.font = '9px Consolas, monospace'; ctx.textBaseline = 'middle';
+    ctx.lineWidth = 1;
+    const tickCount = Math.max(1, Math.round(span / step));
+    for (let tick = 0; tick <= tickCount; tick++) {
+      const y = top + (bottom - top) * tick / tickCount;
+      ctx.strokeStyle = 'rgba(114,139,163,.13)'; ctx.setLineDash([3, 5]);
+      ctx.beginPath(); ctx.moveTo(left, y); ctx.lineTo(right, y); ctx.stroke();
+      if (data.length) { ctx.fillStyle = '#6e7e91'; ctx.textAlign = 'right'; ctx.fillText(numberLabel(max - step * tick, span), left - 9, y); }
+    }
+    ctx.setLineDash([]);
+    ctx.strokeStyle = 'rgba(114,139,163,.2)'; ctx.beginPath(); ctx.moveTo(left, bottom); ctx.lineTo(right, bottom); ctx.stroke();
+    if (options.yLabel) {
+      ctx.fillStyle = '#788a9e'; ctx.font = '9px "Segoe UI", "Microsoft YaHei", sans-serif'; ctx.textAlign = 'left';
+      ctx.fillText(options.yLabel, left, 8);
+    }
+    if (!data.length) {
+      ctx.fillStyle = '#718194'; ctx.font = '11px "Segoe UI", "Microsoft YaHei", sans-serif'; ctx.textAlign = 'center';
+      ctx.fillText(options.empty || '完成第一次训练，记录从这里开始', (left + right) / 2, (top + bottom) / 2, right - left - 15);
+      return;
+    }
+    const xFor = index => maxLength <= 1 ? (left + right) / 2 : left + (right - left) * index / (maxLength - 1);
+    const yFor = value => bottom - (value - min) / span * (bottom - top);
+    ctx.font = '9px Consolas, monospace'; ctx.fillStyle = '#6e7e91'; ctx.textAlign = 'center';
+    const labels = new Set([0, Math.floor((maxLength - 1) / 2), maxLength - 1]);
+    for (const index of labels) ctx.fillText(String(index + 1), xFor(index), bottom + 15);
+    validSeries.forEach((item, seriesIndex) => {
+      if (!Array.isArray(item.values) || !item.values.length) return;
+      const color = options.colorblind ? [colors.positive, colors.negative, '#c5d3e2'][seriesIndex % 3] : (item.color || [colors.positive, colors.negative, '#718b9d'][seriesIndex % 3]);
+      ctx.strokeStyle = color; ctx.lineWidth = seriesIndex === 0 ? 2 : 1.45;
+      ctx.setLineDash(item.dashed || (options.colorblind && seriesIndex === 1) ? [4, 4] : []);
+      ctx.beginPath(); let started = false;
+      for (let i = 0; i < item.values.length; i++) {
+        if (!Number.isFinite(item.values[i])) { started = false; continue; }
+        const x = xFor(i), y = yFor(item.values[i]);
+        if (!started) { ctx.moveTo(x, y); started = true; } else ctx.lineTo(x, y);
+      }
+      ctx.stroke(); ctx.setLineDash([]);
+      if (item.values.length <= 28) {
+        ctx.fillStyle = color;
+        for (let i = 0; i < item.values.length; i++) if (Number.isFinite(item.values[i])) { circle(ctx, xFor(i), yFor(item.values[i]), item.values.length === 1 ? 3 : 1.8); ctx.fill(); }
+      }
+    });
+    ctx.setLineDash([]);
+  }
+  const CampRender = { game, network, heatmap, chart };
+  root.CampRender = CampRender;
+  if (typeof module !== 'undefined' && module.exports) module.exports = CampRender;
+})(typeof globalThis !== 'undefined' ? globalThis : this);
+
+/* UI, recording, replay and cooperative training scheduler. No network APIs. */
+(() => {
+'use strict';
+const $=id=>document.getElementById(id), $$=s=>Array.from(document.querySelectorAll(s));
+const STORAGE='neural-camp-v1', DT=1/30, MAX_SAMPLES=12000, SAVE_SAMPLES=6000, MAX_REPLAY=108000;
+const defaults={}; CampContent.settingsGroups.forEach(g=>g.fields.forEach(f=>defaults[f.key]=f.default));
+const baseSave=()=>({version:1,settings:{...defaults},mode:'classic',difficulty:'beginner',control:matchMedia('(pointer:coarse)').matches?'touch':'keyboard',introDone:false,colorblind:false,largeFont:false,reducedMotion:matchMedia('(prefers-reduced-motion: reduce)').matches,records:{},history:[],growth:[],achievements:{},career:{games:0,totalScore:0,totalSamples:0,aiGames:0},presets:[],samples:[],replays:{},evoHistory:[],lossHistory:[],daily:{},checkpoint:null,imitator:null});
+let stored=baseSave(),storageOK=true;
+try {const raw=localStorage.getItem(STORAGE);if(raw){const v=JSON.parse(raw);if(v.version===1){stored={...stored,...v,settings:{...defaults,...v.settings},career:{...stored.career,...v.career}};}}}catch(e){storageOK=false;}
+// Treat imported/local state as data; never evaluate strings or render them as HTML.
+for(const g of CampContent.settingsGroups)for(const f of g.fields){const v=stored.settings[f.key];if(f.type==='range'){stored.settings[f.key]=Number.isFinite(Number(v))?Math.max(f.min,Math.min(f.max,Number(v))):f.default;}else if(!f.options.some(o=>String(o.value)===String(v)))stored.settings[f.key]=f.default;}
+if(!Arcade.MODES[stored.mode])stored.mode='classic';if(!Arcade.DIFFICULTIES[stored.difficulty])stored.difficulty='beginner';
+for(const key of ['history','growth','presets','evoHistory','lossHistory'])if(!Array.isArray(stored[key]))stored[key]=[];
+for(const key of ['records','daily','replays','achievements'])if(!stored[key]||typeof stored[key]!=='object'||Array.isArray(stored[key]))stored[key]={};
+let samples=(Array.isArray(stored.samples)?stored.samples:[]).filter(s=>s&&Array.isArray(s.x)&&s.x.length===24&&s.x.every(Number.isFinite)&&Number.isInteger(s.y)&&s.y>=0&&s.y<5).slice(-MAX_SAMPLES);
+let model=new Brain.Network({hidden:stored.settings.hiddenLayers===2?[stored.settings.neurons1,stored.settings.neurons2]:[stored.settings.neurons1],activation:stored.settings.activation,seed:8192});
+let champion=null,imitator=null;
+try{if(stored.checkpoint)champion=Brain.Network.fromJSON(stored.checkpoint.network);if(stored.imitator)imitator=Brain.Network.fromJSON(stored.imitator);if(champion)model=champion.clone();else if(imitator)model=imitator.clone();}catch(e){stored.checkpoint=null;stored.imitator=null;}
+stored.gameOverrides=stored.gameOverrides&&typeof stored.gameOverrides==='object'?stored.gameOverrides:{};
+for(const k of Object.keys(stored.gameOverrides))if(!['starCount','lives'].includes(k)||!Number.isFinite(stored.gameOverrides[k]))delete stored.gameOverrides[k];
+if(stored.mode!=='custom'){if(stored.gameOverrides.starCount==null)stored.settings.starCount=Arcade.DIFFICULTIES[stored.difficulty].starCount;if(stored.gameOverrides.lives==null)stored.settings.lives=Arcade.DIFFICULTIES[stored.difficulty].lives;}
+const app={stored,samples,model,game:null,driver:'idle',paused:false,view:'camp',trainer:'evolution',chart:'evolution',evo:null,il:null,record:null,replay:null,episode:0,keys:new Set(),pointer:null,chartDirty:true,frame:0,gameParamsOverride:stored.gameOverrides,currentScope:'',activeOptions:null};
+let toastTimer,resetArmed=false,saveDirty=false,lastSave=0,genCredit=0,stepCredit=0,lastFrame=performance.now(),lastUI=0,lastBrain=0,lastGraphs=0;
+const pad=n=>String(Math.floor(n)).padStart(3,'0');
+const timeLabel=t=>`${String(Math.floor(t/60)).padStart(2,'0')}:${String(Math.floor(t%60)).padStart(2,'0')}`;
+const dateKey=()=>new Date().toISOString().slice(0,10);
+const freshSeed=()=>Math.floor(Math.random()*4294967295);
+function toast(message){$('toast').textContent=message;$('toast').hidden=false;clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').hidden=true,4500);}
+function log(message){const li=document.createElement('li'),tm=document.createElement('time'),txt=document.createElement('span');tm.textContent=new Date().toLocaleTimeString('zh-CN',{hour:'2-digit',minute:'2-digit'});txt.textContent=message;li.append(tm,txt);$('log').prepend(li);while($('log').children.length>70)$('log').lastChild.remove();}
+function mark(){saveDirty=true;}
+function save(){if(!saveDirty)return;stored.samples=samples.slice(-SAVE_SAMPLES);stored.evoHistory=stored.evoHistory.slice(-180);stored.lossHistory=stored.lossHistory.slice(-180);stored.history=stored.history.slice(-30);stored.growth=stored.growth.slice(-300);try{localStorage.setItem(STORAGE,JSON.stringify(stored));storageOK=true;saveDirty=false;$('storage-status').textContent=`本地保存正常 · 已保留最近 ${Math.min(samples.length,SAVE_SAMPLES)} 个示范样本，成绩、模型与设置均在本机。`;}catch(e){if(storageOK)toast('浏览器本地存储已满或不可用。当前仍可玩，请导出大脑保存训练结果。');storageOK=false;$('storage-status').textContent='本地存储不可用或空间已满。当前训练仍在内存中，请导出大脑；关闭页面可能丢失本次进度。';}}
+function netOptions(){const s=stored.settings;return {hidden:s.hiddenLayers===2?[s.neurons1,s.neurons2]:[s.neurons1],activation:s.activation,seed:freshSeed()};}
+function gameParams(){const s=stored.settings;return {gameSpeed:s.gameSpeed,density:s.density,meteorSpeed:s.meteorSpeed,...(stored.mode==='custom'?{starCount:s.starCount,lives:s.lives}:app.gameParamsOverride)};}
+function gameOptions(training=false){const m=stored.mode;return {mode:m,difficulty:m==='daily'?'normal':stored.difficulty,seed:m==='daily'?Arcade.seedFromDate(dateKey()):freshSeed(),params:gameParams(),challengeDate:dateKey(),...(training?{maxTime:['sprint','daily'].includes(m)?60:30}:{})};}
+function scope(options=gameOptions()){const p=options.params||{},d=Arcade.DIFFICULTIES[options.difficulty];return JSON.stringify([options.mode,options.difficulty,options.mode==='daily'?(options.challengeDate||dateKey()):[p.gameSpeed??1,p.density??1,p.meteorSpeed??1,p.starCount??d.starCount,p.lives??d.lives]]);}
+function changedFlight(change){if(!app.record||app.game?.mode==='daily')return;app.record.changes.push({frame:app.frame,...change});app.record.mixed=true;app.currentScope=JSON.stringify(['mixed',app.activeOptions.mode,app.activeOptions.difficulty,app.activeOptions.params,app.record.changes]);}
+function replayKey(who,sc=scope()){return `${who}:${sc}`;}
+function saveReplay(who,sc,record){stored.replays[replayKey(who,sc)]=record;const keys=Object.keys(stored.replays);if(keys.length>16){keys.sort((a,b)=>String(stored.replays[a].date).localeCompare(String(stored.replays[b].date)));for(const k of keys.slice(0,keys.length-16))delete stored.replays[k];}}
+function currentRecord(){return stored.records[scope()]||{human:0,ai:0};}
+function activateModel(net){model=net;app.model=net;$('network-shape').textContent=`24 输入 → ${net.hidden.join(' / ')} 隐藏 → 5 动作`;$('hidden-label').textContent=`${net.hidden.length} 层 · 理解信息`;$('heat-layer').replaceChildren();net.layers.forEach((l,i)=>{const op=document.createElement('option');op.value=i;op.textContent=i===0?'输入 → 隐藏 1':i===net.layers.length-1?`隐藏 ${i} → 输出`:`隐藏 ${i} → 隐藏 ${i+1}`;$('heat-layer').append(op);});}
+function badge(id){if(stored.achievements[id])return;stored.achievements[id]=new Date().toISOString();mark();const a=CampContent.achievements.find(a=>a.id===id);toast(`✦ 解锁成就：${a.title} · ${a.description}`);log(`新成就 · ${a.title}`);renderCareer();}
+function stopTrainers(){if(app.evo)app.evo.running=false;if(app.il)app.il.running=false;updateTrainerButtons();}
+function updateTrainerButtons(){$('evolve').querySelector('span').textContent=app.evo?.running?'暂停进化':app.evo&&!app.evo.dirty?'继续进化':'开始进化';$('imitate').textContent=app.il?.running?'暂停学习':app.il&&!app.il.done?'继续学习':'用我的示范训练';}
+function setView(view){if(!['camp','career','settings','guide'].includes(view))return;app.view=view;$$('.view').forEach(el=>{el.hidden=el.id!==`view-${view}`;el.classList.toggle('active',!el.hidden);});$$('[data-view]').forEach(b=>{b.classList.toggle('active',b.dataset.view===view);b.setAttribute('aria-current',b.dataset.view===view?'page':'false');});$('breadcrumb-title').textContent={camp:'训练场',career:'学习档案',settings:'参数实验室',guide:'游戏指南'}[view];app.keys.clear();app.pointer=null;if(view!=='camp'&&app.driver==='human'&&!app.game?.done)pauseGame(true);if(view==='career')renderCareer();app.chartDirty=true;window.scrollTo({top:0,behavior:'instant'});}
+function syncMode(){const daily=stored.mode==='daily';if(!daily&&stored.mode!=='custom'){const base=Arcade.DIFFICULTIES[stored.difficulty];stored.settings.starCount=app.gameParamsOverride.starCount??base.starCount;stored.settings.lives=app.gameParamsOverride.lives??base.lives;refreshSettings();}$('mode').value=stored.mode;$('difficulty').value=daily?'normal':stored.difficulty;$('difficulty').disabled=daily;$('daily-date').textContent=daily?`${dateKey()} UTC`:'';$('daily-score').hidden=!daily;$('daily-score').textContent=`今日个人最佳：${stored.daily[dateKey()]||0} 分 · 固定普通难度 · 60 秒`;$('mode-description').textContent=`${Arcade.MODES[stored.mode].description} ${daily?'全球使用 UTC 日期；没有在线排行榜。':Arcade.DIFFICULTIES[stored.difficulty].description}`;$('best-scope').textContent=`${Arcade.MODES[stored.mode].label.replace('模式','')} · ${daily?'固定普通':Arcade.DIFFICULTIES[stored.difficulty].label}`;mark();updateStats();}
+function preview(){app.game=new Arcade.Game(gameOptions());app.driver='idle';app.paused=false;app.record=null;app.replay=null;app.activeOptions=null;stepCredit=0;showMessage('READY TO EXPLORE','第一位老师，就是你','移动飞船，靠近星星。你的每个动作都值得学习。','开始我的第一局','start');updateHUD();}
+let messageAction='start';
+function showMessage(tag,title,description,button,action){const m=$('game-message');m.hidden=false;m.querySelector('.live-tag').textContent=tag;m.querySelector('h3').textContent=title;m.querySelector('p').textContent=description;$('canvas-start').textContent=button;$('canvas-start').hidden=!button;messageAction=action;}
+function startGame(driver='human',net=null){if(app.game&&!app.game.done&&['human','ai'].includes(app.driver)&&app.game.time>0)finishGame('restart');stopTrainers();if(net)activateModel(net.clone());const options=gameOptions();app.game=new Arcade.Game(options);app.activeOptions=JSON.parse(JSON.stringify(options));app.currentScope=scope(options);app.driver=driver;app.paused=false;app.replay=null;app.record={options:app.activeOptions,actions:'',changes:[],score:0,source:driver,date:new Date().toISOString(),complete:true};app.episode=Date.now();app.frame=0;app.keys.clear();app.pointer=null;stepCredit=0;$('game-message').hidden=true;$('pause').querySelector('span').textContent='暂停';$('play').innerHTML='<svg><use href="#i-play"/></svg>接管 / 新示范';setView('camp');$('game').focus({preventScroll:true});log(driver==='human'?`你已起飞 · ${Arcade.MODES[stored.mode].label} / ${Arcade.DIFFICULTIES[app.game.difficulty].label}`:'AI 学员已起飞 · 所有动作来自神经网络');updateHUD();}
+function finishGame(reason='manual'){if(!app.game||!['human','ai'].includes(app.driver)||app.game._recorded)return;const g=app.game;if(!g.done)g.finish(reason);g._recorded=true;const who=app.driver,sc=app.currentScope;const rec=stored.records[sc]||{human:0,ai:0};const isBest=g.score>rec[who]||!stored.replays[replayKey(who,sc)];rec[who]=Math.max(rec[who]||0,g.score);stored.records[sc]=rec;
+ stored.career.games++;stored.career.totalScore+=g.score;if(who==='ai')stored.career.aiGames++;
+ stored.history.push({score:g.score,source:who,mode:g.mode,difficulty:g.difficulty,mixed:!!app.record?.mixed,time:+g.time.toFixed(2),date:new Date().toISOString()});
+ if(app.record&&isBest&&app.record.complete){Object.assign(app.record,{score:g.score,time:g.time,reason:g.reason,scope:sc});saveReplay(who,sc,app.record);}
+ if(who==='human'){if(g.score>=100)badge('first100');if(['sprint','daily'].includes(g.mode)&&g.reason==='time')badge('firstFinish');const p=app.activeOptions.params;if(!app.record?.mixed&&['classic','survival','sprint'].includes(g.mode)&&g.difficulty==='extreme'&&g.score>=500&&p.gameSpeed===1&&p.density===1&&p.meteorSpeed===1&&(p.lives??1)===1&&(p.starCount??4)===4)badge('extreme500');if(g.mode==='daily'){const runDate=app.activeOptions.challengeDate;stored.daily[runDate]=Math.max(stored.daily[runDate]||0,g.score);}}
+ if(rec.human>0&&rec.ai>rec.human)badge('aiWins');
+ const reasonText={collision:'生命用完啦',lives:'生命用完啦',time:'完成本次挑战',manual:'本次飞行已结算',restart:'上一局已保存'}[g.reason]||'本次飞行已结算';
+ showMessage(who==='human'?'FLIGHT RECORDED':'AI FLIGHT COMPLETE',`${g.score} 分 · ${reasonText}`,`收集 ${g.collected} 颗星星，飞行 ${timeLabel(g.time)}。${app.record?.mixed?'规则中途变化，已记入生涯，不混入标准成绩比较。':who==='human'?'你的动作已成为新的学习素材。':'每个决定都来自它自己的大脑。'}`,'再飞一局','start');log(`${who==='human'?'你':'AI'}的飞行 · ${g.score} 分 · ${timeLabel(g.time)} · ${Arcade.MODES[g.mode].label}${app.record?.mixed?' · 混合规则':''}`);app.paused=false;app.chartDirty=true;mark();save();syncMode();renderCareer();}
+function pauseGame(force){if(app.driver==='training'){if(app.evo?.dirty){toast('环境已修改，请点击「开始进化」建立同规则的新实验。');return;}if(app.evo)app.evo.running=force===undefined?!app.evo.running:!force;$('pause').querySelector('span').textContent=app.evo?.running?'暂停':'继续';updateTrainerButtons();return;}if(app.driver==='idle'&&app.il&&!app.il.done){app.il.running=force===undefined?!app.il.running:!force;$('pause').querySelector('span').textContent=app.il.running?'暂停':'继续';updateTrainerButtons();return;}if(!app.game||app.game.done||app.driver==='idle')return;app.paused=force===undefined?!app.paused:force;app.keys.clear();app.pointer=null;$('pause').querySelector('span').textContent=app.paused?'继续':'暂停';if(app.paused)showMessage('TAKE A BREATH','歇一会儿，星空会等你','游戏时间已暂停，按空格或下方按钮继续。','继续飞行','resume');else $('game-message').hidden=true;}
+function humanAction(){const k=app.keys;if(k.has('ArrowUp')||k.has('w'))return 0;if(k.has('ArrowDown')||k.has('s'))return 1;if(k.has('ArrowLeft')||k.has('a'))return 2;if(k.has('ArrowRight')||k.has('d'))return 3;if(app.pointer&&stored.control!=='keyboard'){const dx=app.pointer.x-app.game.ship.x,dy=app.pointer.y-app.game.ship.y;if(Math.hypot(dx,dy)<9)return 4;return Math.abs(dx)>Math.abs(dy)?(dx>0?3:2):(dy>0?1:0);}return 4;}
+function gameTick(){if(!app.game||app.paused||app.game.done||!['human','ai','replay'].includes(app.driver))return;
+ if(app.driver==='replay'){const rep=app.replay;if(rep.index>=rep.data.actions.length){app.game.finish(rep.data.reason||'manual');showMessage('REPLAY COMPLETE','回放完成',`已重现 ${rep.data.score} 分的最佳飞行。回放不会重复计分或收集示范。`,'开始新的一局','start');return;}while(rep.changeIndex<rep.data.changes.length&&rep.data.changes[rep.changeIndex].frame===rep.index){const c=rep.data.changes[rep.changeIndex++];if(c.params)app.game.setParams(c.params);if(c.difficulty)app.game.setDifficulty(c.difficulty);}app.game.step(Number(rep.data.actions[rep.index++] ),DT);model.forward(app.game.features());if(app.game.done)showMessage('REPLAY COMPLETE','回放完成',`原记录 ${rep.data.score} 分 · 回放 ${app.game.score} 分。你可以再试一次。`,'开始新的一局','start');return;}
+ const x=app.game.features(),action=app.driver==='human'?humanAction():model.predict(x);
+ if(app.driver==='human'){samples.push({x:Array.from(x,v=>+v.toFixed(5)),y:action,episode:app.episode});if(samples.length>MAX_SAMPLES)samples.splice(0,1000);stored.career.totalSamples++;if(stored.career.totalSamples>=500)badge('teacher500');model.forward(x);mark();}
+ if(app.record){if(app.record.actions.length<MAX_REPLAY)app.record.actions+=String(action);else app.record.complete=false;}
+ app.game.step(action,DT);app.frame++;if(app.game.done)finishGame(app.game.reason);
+}
+function replay(who){const r=stored.replays[replayKey(who)]||Object.values(stored.replays).filter(r=>r.source===who).sort((a,b)=>String(b.date).localeCompare(String(a.date)))[0];if(!r||typeof r.actions!=='string'||!r.actions.length){toast('还没有可回放的最佳一局。先完成一次飞行。');return;}if(r.scope!==scope())toast(`当前规则尚无回放，展示最近保存的${Arcade.MODES[r.options.mode].label}最佳。`);if(app.game&&!app.game.done&&['human','ai'].includes(app.driver))finishGame('manual');stopTrainers();app.driver='replay';app.game=new Arcade.Game(r.options);app.replay={data:r,index:0,changeIndex:0};app.record=null;app.paused=false;stepCredit=0;$('game-message').hidden=true;setView('camp');log(`回放${who==='human'?'玩家':'AI'}最佳 · ${r.score} 分 · ${Arcade.MODES[r.options.mode].label}`);}
+function setupEvolution(){const s=stored.settings,options=gameOptions(true),seed=freshSeed();const evo=new Brain.Evolution({...netOptions(),populationSize:s.populationSize,mutationRate:s.mutationRate,eliteRatio:s.eliteRatio,seed});
+ // A valid persisted champion seeds one individual; all other individuals begin randomly.
+ if(champion&&stored.checkpoint?.scope===scope(options)&&JSON.stringify(champion.hidden)===JSON.stringify(netOptions().hidden)&&champion.activation===s.activation)evo.population[0]=champion.clone();
+ app.evo={engine:evo,options,scope:scope(options),running:true,dirty:false,completed:0,envs:[],actions:[],last:null};stored.evoHistory=[];stored.checkpoint=null;champion=null;newPopulation();activateModel(evo.population[0]);log(`新实验 · ${s.populationSize} 个大脑 · ${options.maxTime} 秒评估 · 同一种子 ${options.seed}`);app.chartDirty=true;mark();}
+function newPopulation(){const e=app.evo;e.envs=e.engine.population.map(()=>new Arcade.Game(e.options));e.actions=e.envs.map(()=>'');e.completed=0;genCredit=0;}
+function toggleEvolution(){if(app.il)app.il.running=false;if(app.evo&&!app.evo.dirty){app.evo.running=!app.evo.running;}else setupEvolution();if(app.evo.running){if(['human','ai'].includes(app.driver)&&app.game&&!app.game.done)finishGame('manual');app.driver='training';app.paused=false;app.record=null;app.replay=null;$('game-message').hidden=true;app.chart='evolution';setChart('evolution');setTrainer('evolution');log('训练继续 · 观察正在试飞的学员');}updateTrainerButtons();}
+function evolutionTick(elapsed){const e=app.evo;if(!e?.running)return;genCredit=Math.min(genCredit+elapsed*30*Number($('speed').value),32);const deadline=performance.now()+9;let rounds=0;
+ while(genCredit>=1&&performance.now()<deadline){genCredit--;rounds++;let alive=0;
+  for(let i=0;i<e.envs.length;i++){const g=e.envs[i];if(!g.done){const a=e.engine.population[i].predict(g.features());g.step(a,DT);e.actions[i]+=String(a);}if(!g.done)alive++;}
+  e.completed=e.envs.length-alive;
+  if(!alive){const fits=e.envs.map(g=>g.score);const top=fits.indexOf(Math.max(...fits));const bestRun=e.envs[top],bestBrain=e.engine.population[top].clone();const info=e.engine.advance(fits);e.last=info;stored.evoHistory.push({generation:info.generation,best:info.best,mean:+info.mean.toFixed(2),historicalBest:info.historicalBest});stored.growth.push({generation:info.generation,score:info.best,scope:e.scope});
+   if(!champion||info.best>=stored.checkpoint.score){champion=bestBrain;stored.checkpoint={network:champion.toJSON(),scope:e.scope,options:e.options,generation:info.generation,score:info.historicalBest};}
+   const rec=stored.records[e.scope]||{human:0,ai:0};if(info.best>rec.ai){rec.ai=info.best;saveReplay('ai',e.scope,{options:e.options,actions:e.actions[top],changes:[],source:'ai',score:bestRun.score,time:bestRun.time,reason:bestRun.reason,date:new Date().toISOString(),complete:true,scope:e.scope});}stored.records[e.scope]=rec;
+   if(rec.human>0&&rec.ai>rec.human)badge('aiWins');if(info.generation>=10)badge('evo10');
+   log(`第 ${info.generation} 代 · 最佳 ${info.best} / 平均 ${info.mean.toFixed(1)} / 历史 ${info.historicalBest}`);app.chartDirty=true;mark();newPopulation();break;
+  }
+ }
+ if(rounds&&app.driver==='training'){let representative=0;for(let i=1;i<e.envs.length;i++)if((!e.envs[i].done||e.envs[representative].done)&&e.envs[i].score>e.envs[representative].score)representative=i;app.game=e.envs[representative];const net=e.engine.population[representative];if(model!==net){model=net;app.model=net;}model.forward(app.game.features());}
+}
+function watchChampion(){if(!champion){toast('先完成一代进化，或导入一个大脑，再来看它飞行。');return;}if(stored.checkpoint?.scope!==scope())toast('正在当前关卡测试冠军；当前规则与它训练时可能不同。');startGame('ai',champion);}
+function shuffle(array,rng){for(let i=array.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[array[i],array[j]]=[array[j],array[i]];}return array;}
+function setupImitation(){if(samples.length<50){toast('先亲手飞行至少 2 秒；建议示范 500 个以上动作，再开始学习。');return false;}
+ const all=samples.slice(),episodes=[...new Set(all.map(s=>s.episode))];let train,validation;
+ if(episodes.length>=2){const held=new Set(episodes.slice(-Math.max(1,Math.floor(episodes.length*.2))));train=all.filter(s=>!held.has(s.episode));validation=all.filter(s=>held.has(s.episode));if(train.length<30||validation.length<10){const split=Math.floor(all.length*.8);train=all.slice(0,Math.max(1,split-10));validation=all.slice(split);}}
+ else{const split=Math.floor(all.length*.8);train=all.slice(0,Math.max(1,split-10));validation=all.slice(split);}
+ const rng=Brain.createRNG(freshSeed()),s=stored.settings;imitator=new Brain.Network(netOptions());app.il={running:true,done:false,net:imitator,train,validation:validation.slice(-2400),rng,order:shuffle([...train.keys()],rng),index:0,epoch:0,maxEpoch:s.epochs,lr:s.learningRate,batch:s.batchSize,last:null};const initial=imitator.evaluate(train.slice(0,2400));stored.lossHistory=[{epoch:0,loss:initial.loss,valLoss:imitator.evaluate(app.il.validation).loss}];activateModel(imitator);log(`模仿学习 · ${train.length} 训练 / ${app.il.validation.length} 留出样本 · 按完整示范局或连续片段隔离`);app.chartDirty=true;return true;}
+function toggleImitation(){if(app.evo)app.evo.running=false;if(app.il&&!app.il.done)app.il.running=!app.il.running;else if(!setupImitation())return;
+ if(app.il.running){if(['human','ai'].includes(app.driver)&&app.game&&!app.game.done)finishGame('manual');app.driver='idle';app.paused=false;showMessage('LEARNING FROM YOU','正在学习你的选择',`用 ${app.il.train.length} 个真实动作训练，${app.il.validation.length} 个留出样本检验。`,'亲自示范一局','start');setChart('loss');activateModel(imitator);}updateTrainerButtons();}
+function imitationTick(){const il=app.il;if(!il?.running)return;const deadline=performance.now()+9;
+ while(il.running&&performance.now()<deadline){const indices=il.order.slice(il.index,il.index+il.batch),batch=indices.map(i=>il.train[i]);il.net.trainBatch(batch,il.lr);il.index+=indices.length;
+  if(il.index>=il.order.length){il.epoch++;const metrics=il.net.evaluate(il.train.slice(0,2400)),val=il.net.evaluate(il.validation);il.last={...metrics,accuracy:val.accuracy,valLoss:val.loss};stored.lossHistory.push({epoch:il.epoch,loss:metrics.loss,valLoss:val.loss});stored.imitator=il.net.toJSON();log(`学习 ${il.epoch}/${il.maxEpoch} 轮 · loss ${metrics.loss.toFixed(3)} · 留出准确率 ${(100*val.accuracy).toFixed(1)}%`);app.chartDirty=true;mark();
+   if(il.epoch>=il.maxEpoch){il.running=false;il.done=true;toast(`学习完成：留出准确率 ${(100*val.accuracy).toFixed(1)}%。可以让学员试飞了。`);showMessage('LESSON COMPLETE','轮到 AI，试着飞一次',`学习完成 ${il.epoch} 轮。预测准确率只是模仿指标，实际飞行还要看它如何处理新情况。`,'看学员演示','imitator');save();updateTrainerButtons();break;}
+   il.index=0;shuffle(il.order,il.rng);break;
+  }
+ }
+}
+function setTrainer(kind){app.trainer=kind;$$('[data-trainer]').forEach(b=>{b.classList.toggle('active',b.dataset.trainer===kind);b.setAttribute('aria-pressed',b.dataset.trainer===kind);});$('trainer-evolution').hidden=kind!=='evolution';$('trainer-imitation').hidden=kind!=='imitation';setChart(kind==='imitation'?'loss':'evolution');}
+function setChart(kind){app.chart=kind;$$('[data-chart]').forEach(b=>b.classList.toggle('active',b.dataset.chart===kind));$('chart-axis').textContent=kind==='evolution'?'横轴：世代 · 纵轴：实际得分':'横轴：学习轮数 · 纵轴：交叉熵损失（越低越好）';$('chart-legend').innerHTML=kind==='evolution'?'<span class="mint-dot">历史最佳</span><span class="violet-dot">当代平均</span><span class="dim-dot">当代最佳</span><small id="chart-caption">实际成绩，有起伏很正常</small>':'<span class="mint-dot">训练损失</span><span class="violet-dot">留出损失</span><small id="chart-caption">使用真实示范计算</small>';app.chartDirty=true;}
+function updateHUD(){const g=app.game;if(!g)return;$('score').textContent=pad(g.score);$('stars').textContent=g.collected;$('time').textContent=timeLabel(['sprint','daily'].includes(g.mode)?Math.max(0,60-g.time):g.time);$('lives').textContent=g.mode==='zen'?'∞ 无压力':Array.from({length:g.lives},()=> '♡').join(' ');$('driver-label').textContent={idle:'等待起飞',human:app.paused?'已暂停':'你在示范',ai:app.paused?'已暂停':'AI 驾驶',training:app.evo?.running?'学员试飞中':'训练已暂停',replay:'最佳回放'}[app.driver];$('record-status').innerHTML=app.driver==='human'?'<i class="record-dot"></i>正在记录示范':app.driver==='replay'?'种子 + 动作精确重现':'<i class="record-dot"></i>所有数据留在本机';}
+function updateStats(){const rec=currentRecord();$('player-best').textContent=pad(rec.human);$('ai-best').textContent=pad(rec.ai);$('human-compare').textContent=rec.human;$('ai-compare').textContent=rec.ai;const mx=Math.max(rec.human,rec.ai,1);$('human-bar').style.width=`${rec.human/mx*100}%`;$('ai-bar').style.width=`${rec.ai/mx*100}%`;$('compare-caption').textContent=rec.human===0?'第一场教学，从你开始。':rec.ai>rec.human?'学员已经领先！再来一次，给它新的示范。':'同规则的实际得分。进化试飞有时限，完整飞行不限于训练时长。';$('sample-top').textContent=pad(samples.length);$('samples').textContent=samples.length;$('side-samples').textContent=`${Math.min(stored.career.totalSamples,500)} / 500`;$('mission-progress').style.width=`${Math.min(stored.career.totalSamples/5,100)}%`;
+ const e=app.evo,last=e?.last||stored.evoHistory.at(-1);$('current-fitness').textContent=last?.best??'—';$('historical-fitness').textContent=last?.historicalBest??'—';$('generation-top').textContent=String(last?.generation||0).padStart(2,'0');$('generation').textContent=e?e.engine.generation:last?.generation||'—';$('population').textContent=e?.engine.population.length||stored.settings.populationSize;$('mean-fitness').textContent=last?.mean!=null?Number(last.mean).toFixed(1):'—';$('evo-top-state').textContent=e?.running?'真实试飞 · 自主进化':last?'已保存训练记录':'等待第一次进化';if(e){const avg=e.envs.reduce((s,g)=>s+(g.done?1:Math.min(g.time/e.options.maxTime,1)),0)/e.envs.length;$('evo-progress').style.width=`${avg*100}%`;$('evo-progress-text').textContent=`第 ${e.engine.generation} 代 · 已完成 ${e.completed} / ${e.envs.length} 位 · ${(avg*100).toFixed(0)}% 试飞进度`;}else{$('evo-progress').style.width='0%';$('evo-progress-text').textContent='准备好第一批学员';}
+ const il=app.il;if(il){$('accuracy').textContent=il.last?`${(il.last.accuracy*100).toFixed(1)}%`:'—';$('loss').textContent=il.last?il.last.loss.toFixed(3):'—';$('imitation-status').textContent=`${il.epoch} / ${il.maxEpoch} 轮 · ${il.train.length} 训练 + ${il.validation.length} 留出样本。${samples.length<500?'示范较少，再多玩几局效果会更稳定。':'准确率是对保留示范的动作预测，不代表游戏胜率。'}`;}}
+function drawCharts(){const cb={colorblind:stored.colorblind};if(app.view==='camp'){const h=app.chart==='evolution'?stored.evoHistory:stored.lossHistory;const colors=stored.colorblind?['#85c7ff','#ffbd78','#657c94']:['#6de7bd','#ac94ed','#657c94'];const series=app.chart==='evolution'?[{values:h.map(a=>a.historicalBest),color:colors[0]},{values:h.map(a=>a.mean),color:colors[1],dashed:true},{values:h.map(a=>a.best),color:colors[2]}]:[{values:h.map(a=>a.loss),color:colors[0]},{values:h.map(a=>a.valLoss),color:colors[1],dashed:true}];CampRender.chart($('training-chart'),series,{...cb,empty:app.chart==='evolution'?'启动第一次进化，记录 AI 的起点':'先示范，再训练，观察损失如何变化'});}if(app.view==='career'){CampRender.chart($('history-chart'),[{values:stored.history.map(h=>h.score)}],{...cb,empty:'还没有飞行记录'});CampRender.chart($('career-chart'),[{values:stored.growth.map(h=>h.score)}],{...cb,empty:'完成一代进化后开始记录'});}app.chartDirty=false;}
+function renderCareer(){$('career-stats').replaceChildren();for(const [name,value] of [['完成飞行',stored.career.games],['累计得分',stored.career.totalScore],['累计示范',stored.career.totalSamples],['AI 试飞',stored.career.aiGames]]){const div=document.createElement('div');div.className='career-stat';const label=document.createElement('small'),val=document.createElement('strong');label.textContent=name;val.textContent=value;div.append(label,val);$('career-stats').append(div);}$('achievements').replaceChildren();CampContent.achievements.forEach(a=>{const el=document.createElement('div');el.className=`achievement${stored.achievements[a.id]?' unlocked':''}`;el.innerHTML='<span><svg><use href="#i-cup"/></svg></span><div><strong></strong><p></p></div>';el.querySelector('strong').textContent=a.title+(stored.achievements[a.id]?' · 已解锁':'');el.querySelector('p').textContent=a.description;$('achievements').append(el);});$('achievement-count').textContent=`${Object.keys(stored.achievements).length} / 6`;$('history-empty').hidden=stored.history.length>0;app.chartDirty=true;}
+function buildSettings(){CampContent.settingsGroups.forEach(group=>{const panel=document.createElement('section');panel.className='panel';const heading=document.createElement('div');heading.className='panel-heading';heading.innerHTML=`<h2>${group.title}</h2><span class="label">${group.tag}</span>`;const body=document.createElement('div');body.className='setting-body';group.fields.forEach(f=>{const row=document.createElement('div');row.className='setting-row';const label=document.createElement('label');label.htmlFor=`setting-${f.key}`;label.textContent=f.label;let input;
+ if(f.type==='range'){input=document.createElement('input');Object.assign(input,{type:'range',min:f.min,max:f.max,step:f.step,value:stored.settings[f.key]});const output=document.createElement('output');output.id=`out-${f.key}`;output.textContent=`${stored.settings[f.key]}${f.unit||''}`;label.append(output);row.append(label,input);}else{input=document.createElement('select');f.options.forEach(o=>{const option=document.createElement('option');option.value=o.value;option.textContent=o.label;input.append(option);});input.value=stored.settings[f.key];label.append(input);row.append(label);}input.id=`setting-${f.key}`;input.setAttribute('aria-label',f.label);const note=document.createElement('small');note.textContent=f.help;row.append(note);input.addEventListener('input',()=>{const value=f.key==='activation'?input.value:Number(input.value);stored.settings[f.key]=value;if(f.type==='range')$(`out-${f.key}`).textContent=`${value}${f.unit||''}`;parameterChanged(f.key,value);});body.append(row);});panel.append(heading,body);$('settings-groups').append(panel);});}
+function parameterChanged(key,value){const gameplay=['gameSpeed','density','meteorSpeed','starCount','lives'].includes(key);if(gameplay){if(['starCount','lives'].includes(key))app.gameParamsOverride[key]=value;if(app.game&&!['replay','training'].includes(app.driver)){app.game.setParams({[key]:value});if(!app.game.done)changedFlight({params:{[key]:value}});}}if(app.evo){app.evo.running=false;app.evo.dirty=true;}if(app.il&&!gameplay){app.il.running=false;app.il.done=true;}if(['hiddenLayers','neurons1','neurons2','activation'].includes(key)&&app.driver==='idle')activateModel(new Brain.Network(netOptions()));updateTrainerButtons();mark();updateStats();}
+function refreshSettings(){for(const g of CampContent.settingsGroups)for(const f of g.fields){$(`setting-${f.key}`).value=stored.settings[f.key];if(f.type==='range')$(`out-${f.key}`).textContent=`${stored.settings[f.key]}${f.unit||''}`;}}
+function renderPresets(){$('preset-select').replaceChildren();const first=document.createElement('option');first.value='';first.textContent='选择一个预设';$('preset-select').append(first);stored.presets.forEach((p,i)=>{const opt=document.createElement('option');opt.value=i;opt.textContent=p.name;$('preset-select').append(opt);});}
+function applyAccessibility(){document.body.classList.toggle('colorblind',stored.colorblind);document.body.classList.toggle('large-font',stored.largeFont);document.body.classList.toggle('reduced-motion',stored.reducedMotion);$('colorblind').checked=stored.colorblind;$('large-font').checked=stored.largeFont;$('reduced-motion').checked=stored.reducedMotion;app.chartDirty=true;}
+let introIndex=0,lessonIndex=0;
+function showIntro(){$('intro').hidden=false;const item=CampContent.introSteps[introIndex];$('intro-step').textContent=`0${introIndex+1} / 04`;$('intro-title').textContent=item.title;$('intro-text').textContent=item.text;$('intro-next').textContent=introIndex===3?'开始探索 ✓':'下一步 →';}
+function endIntro(){stored.introDone=true;$('intro').hidden=true;mark();save();}
+function renderLesson(){const l=CampContent.lessons[lessonIndex];$('lesson-step').textContent=`${lessonIndex+1} / 3`;$('lesson-title').textContent=l.title;$('lesson-text').textContent=l.text;$('lesson-visual').replaceChildren();l.boxes.forEach((b,i)=>{if(i){const arr=document.createElement('span');arr.className='lesson-arrow';arr.textContent='→';$('lesson-visual').append(arr);}const box=document.createElement('div');box.className='lesson-box';const strong=document.createElement('strong'),small=document.createElement('small');strong.textContent=b.strong;small.textContent=b.small;box.append(strong,small);$('lesson-visual').append(box);});$('lesson-prev').disabled=lessonIndex===0;$('lesson-next').textContent=lessonIndex===2?'去实践一下 →':'下一课 →';}
+function bind(){
+ $$('[data-view]').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.view)));document.querySelector('.brand').addEventListener('click',e=>{e.preventDefault();setView('camp');});
+ $('play').onclick=()=>startGame();$('canvas-start').onclick=()=>{if(messageAction==='resume')pauseGame(false);else if(messageAction==='imitator'&&imitator)startGame('ai',imitator);else startGame();};$('pause').onclick=()=>pauseGame();$('restart').onclick=()=>startGame();$('finish').onclick=()=>{if(['human','ai'].includes(app.driver))finishGame();else if(app.driver==='replay')preview();else if(app.evo?.running){app.evo.running=false;updateTrainerButtons();toast('进化已暂停，已完成的世代已保存。');}else toast('开始一局飞行后，可以随时结算。');};
+ $('mode').onchange=()=>{if(['human','ai'].includes(app.driver)&&!app.game.done)finishGame('manual');stopTrainers();if(app.evo)app.evo.dirty=true;stored.mode=$('mode').value;syncMode();preview();save();};
+ $('difficulty').onchange=()=>{stored.difficulty=$('difficulty').value;const custom=stored.mode==='custom',base=Arcade.DIFFICULTIES[stored.difficulty];if(!custom){app.gameParamsOverride=stored.gameOverrides={};stored.settings.starCount=base.starCount;stored.settings.lives=base.lives;refreshSettings();}const params=custom?gameParams():{...gameParams(),starCount:null,lives:null};if(app.game&&!['replay','training'].includes(app.driver)&&app.game.mode!=='daily'){app.game.setParams(params);app.game.setDifficulty(stored.difficulty);if(!app.game.done)changedFlight({params,difficulty:stored.difficulty});}stopTrainers();if(app.evo)app.evo.dirty=true;syncMode();if(app.driver==='idle')preview();toast(`已切换${base.label}难度${app.record?.mixed?'；本局按混合规则记录':''}`);};
+ $('control').onchange=()=>{stored.control=$('control').value;app.pointer=null;app.keys.clear();mark();toast({keyboard:'用方向键 / WASD 移动；空格暂停。',mouse:'移动鼠标设置目标，飞船会跟随。',touch:'在画布上按住并拖动，飞船会跟随手指。'}[stored.control]);};
+ $('practice').onclick=()=>{stored.mode='zen';syncMode();startGame();};$('evolve').onclick=toggleEvolution;$('watch').onclick=watchChampion;$('imitate').onclick=toggleImitation;$('watch-imitation').onclick=()=>imitator?startGame('ai',imitator):toast('先收集示范并完成训练，再让学员演示。');
+ $$('[data-trainer]').forEach(b=>b.onclick=()=>setTrainer(b.dataset.trainer));$$('[data-chart]').forEach(b=>b.onclick=()=>setChart(b.dataset.chart));
+ $('replay-human').onclick=()=>replay('human');$('replay-ai').onclick=()=>replay('ai');
+ $('tutorial-open').onclick=()=>{setView('guide');lessonIndex=0;renderLesson();};$('intro-next').onclick=()=>introIndex===3?endIntro():(introIndex++,showIntro());$('intro-skip').onclick=endIntro;
+ $('lesson-prev').onclick=()=>{lessonIndex=Math.max(0,lessonIndex-1);renderLesson();};$('lesson-next').onclick=()=>{if(lessonIndex===2){setView('camp');stored.mode='zen';syncMode();startGame();}else{lessonIndex++;renderLesson();}};
+ $('save-preset').onclick=()=>{const name=$('preset-name').value.trim()||`我的实验 ${stored.presets.length+1}`;const p={name,settings:{...stored.settings}};const index=stored.presets.findIndex(p=>p.name===name);if(index>=0)stored.presets[index]=p;else stored.presets.push(p);stored.presets=stored.presets.slice(-20);renderPresets();mark();save();toast(`已保存预设「${name}」`);};
+ $('load-preset').onclick=()=>{const v=$('preset-select').value;if(v==='')return toast('先选择一个已保存的预设。');if(['human','ai'].includes(app.driver)&&!app.game.done)finishGame('manual');const p=stored.presets[Number(v)];stored.settings={...defaults,...p.settings};stored.mode='custom';app.gameParamsOverride=stored.gameOverrides={};stopTrainers();if(app.evo)app.evo.dirty=true;if(app.il)app.il.done=true;refreshSettings();syncMode();preview();mark();save();toast(`已加载「${p.name}」，进入自定义模式。`);};
+ for(const [id,key] of [['colorblind','colorblind'],['large-font','largeFont'],['reduced-motion','reducedMotion']])$(id).onchange=()=>{stored[key]=$(id).checked;applyAccessibility();mark();};
+ $('export').onclick=()=>{const chosen=app.trainer==='imitation'?(imitator||model):(champion||model);const data={format:'neural-camp-checkpoint',version:1,createdAt:new Date().toISOString(),kind:app.trainer,settings:{...stored.settings},network:chosen.toJSON(),note:'仅含网络权重与设置，不含个人示范。'};const url=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download=`neural-camp-${app.trainer}-${dateKey()}.json`;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);toast('大脑已导出为 JSON，可在另一台设备继续使用。');};
+ $('import').onclick=()=>$('import-file').click();$('import-file').onchange=async()=>{const file=$('import-file').files[0];if(!file)return;try{if(file.size>1024*1024)throw new Error('文件不得超过 1 MB');const data=JSON.parse(await file.text());const net=Brain.Network.fromJSON(data.network||data);stopTrainers();app.il=null;if(app.evo)app.evo.dirty=true;activateModel(net);if(data.kind==='imitation'){imitator=net.clone();stored.imitator=net.toJSON();setTrainer('imitation');}else{champion=net.clone();stored.checkpoint={network:net.toJSON(),scope:'imported',score:0,generation:0};}updateTrainerButtons();mark();save();toast('大脑已导入，点击演示按钮查看它的表现。');log(`导入大脑 · ${net.sizes.join(' → ')} · ${net.activation}`);}catch(e){toast(`导入失败：${e.message}`);}finally{$('import-file').value='';}};
+ $('reset-training').onclick=()=>{if(!resetArmed){resetArmed=true;$('reset-training').textContent='再次点击确认重置';setTimeout(()=>{resetArmed=false;$('reset-training').textContent='重置训练';},5000);return;}stopTrainers();app.evo=null;app.il=null;champion=null;imitator=null;stored.checkpoint=null;stored.imitator=null;stored.evoHistory=[];stored.lossHistory=[];activateModel(new Brain.Network(netOptions()));if(app.driver==='training')preview();$('accuracy').textContent='—';$('loss').textContent='—';updateTrainerButtons();mark();save();app.chartDirty=true;toast('训练已重置，游戏成绩和你的示范仍然保留。');resetArmed=false;$('reset-training').textContent='重置训练';};
+ document.addEventListener('keydown',e=>{if(app.view!=='camp')return;const target=e.target;if(target.closest('input,select,textarea,button,summary,a'))return;const key=e.key.length===1?e.key.toLowerCase():e.key;if(['ArrowUp','ArrowDown','ArrowLeft','ArrowRight','w','a','s','d'].includes(key)){if(['human','ai'].includes(app.driver)&&!app.game.done){e.preventDefault();if(app.driver==='human')app.keys.add(key);}}if(e.code==='Space'){e.preventDefault();if(!e.repeat)pauseGame();}});document.addEventListener('keyup',e=>app.keys.delete(e.key.length===1?e.key.toLowerCase():e.key));
+ const pointer=e=>{const box=$('game').getBoundingClientRect();return{x:(e.clientX-box.left)/box.width*Arcade.W,y:(e.clientY-box.top)/box.height*Arcade.H};};let touchDown=false;$('game').addEventListener('pointerdown',e=>{if(stored.control==='keyboard')return;touchDown=true;$('game').setPointerCapture(e.pointerId);app.pointer=pointer(e);$('game').focus({preventScroll:true});e.preventDefault();});$('game').addEventListener('pointermove',e=>{if(stored.control==='mouse'||(stored.control==='touch'&&touchDown))app.pointer=pointer(e);});const pointerUp=()=>{touchDown=false;if(stored.control==='touch')app.pointer=null;};$('game').addEventListener('pointerup',pointerUp);$('game').addEventListener('pointercancel',pointerUp);$('game').addEventListener('pointerleave',()=>{if(stored.control==='mouse')app.pointer=null;});
+ window.addEventListener('blur',()=>{app.keys.clear();app.pointer=null;touchDown=false;});document.addEventListener('visibilitychange',()=>{if(document.hidden){app.keys.clear();app.pointer=null;if(['human','ai','replay'].includes(app.driver))pauseGame(true);if(app.evo?.running||app.il?.running){stopTrainers();log('页面转到后台，训练自动暂停。');}save();}});window.addEventListener('pagehide',save);window.addEventListener('resize',()=>{app.chartDirty=true;});
+ $$('[data-tip]').forEach(b=>{const show=()=>{const t=$('tooltip');t.textContent=b.dataset.tip;t.hidden=false;const r=b.getBoundingClientRect();t.style.left=`${Math.min(window.innerWidth-t.offsetWidth-12,Math.max(12,r.left-50))}px`;t.style.top=`${Math.min(window.innerHeight-t.offsetHeight-12,r.bottom+8)}px`;};b.onmouseenter=show;b.onfocus=show;b.onclick=()=>{$('tooltip').hidden?show():$('tooltip').hidden=true;};b.onmouseleave=()=>{$('tooltip').hidden=true;};b.onblur=()=>{$('tooltip').hidden=true;};});document.addEventListener('keydown',e=>{if(e.key==='Escape')$('tooltip').hidden=true;});
+}
+function frame(now){const dt=Math.min(.15,(now-lastFrame)/1000);lastFrame=now;if(!document.hidden){evolutionTick(dt);imitationTick();if(!app.paused){stepCredit=Math.min(stepCredit+dt,DT*5);while(stepCredit>=DT){gameTick();stepCredit-=DT;}}else stepCredit=0;
+ if(app.view==='camp'){CampRender.game($('game'),app.game.snapshot(),{idle:app.driver==='idle',paused:app.paused,colorblind:stored.colorblind,reducedMotion:stored.reducedMotion,clock:now/1000,assist:app.game.config.assist,target:app.pointer});if(now-lastBrain>110){CampRender.network($('network'),model,{colorblind:stored.colorblind});if(document.querySelector('.heatmap').open)CampRender.heatmap($('heatmap'),model,Number($('heat-layer').value),{colorblind:stored.colorblind});const p=model.activations.at(-1);const top=p.indexOf(Math.max(...p));$$('.action').forEach((el,i)=>{el.classList.toggle('active',i===top);el.querySelector('i').style.width=`${(p[i]||0)*100}%`;el.querySelector('small').textContent=`${((p[i]||0)*100).toFixed(0)}%`;});lastBrain=now;}}
+ if(now-lastUI>180){updateHUD();updateStats();lastUI=now;}if(app.chartDirty&&now-lastGraphs>250){drawCharts();lastGraphs=now;}if(now-lastSave>15000){save();lastSave=now;}}
+ requestAnimationFrame(frame);
+}
+buildSettings();renderPresets();applyAccessibility();CampContent.rules.forEach((r,i)=>{const card=document.createElement('section');card.className='panel rule-card';card.innerHTML=`<h3><span>${String(i+1).padStart(2,'0')}</span>${r.title.replace(/^\d+\s*·\s*/, '')}</h3>${r.html}`;$('rules').append(card);});['上 ↑','下 ↓','左 ←','右 →','不动 ·'].forEach((name,i)=>{const el=document.createElement('div');el.className='action';el.innerHTML=`<span>${name}</span><div class="bar"><i></i></div><small>20%</small>`;$('action-bars').append(el);});
+$('control').value=stored.control;activateModel(model);renderCareer();renderLesson();bind();syncMode();preview();model.forward(app.game.features());if(!stored.introDone)showIntro();if(!storageOK){$('storage-status').textContent='浏览器未允许本地存储。游戏仍可运行，请通过导出 JSON 保存大脑。';toast('当前浏览器不允许本地保存，训练后记得导出大脑。');}requestAnimationFrame(frame);
+// Read-only-oriented diagnostics exposed for local acceptance tests; no automated teacher in product.
+window.NeuralCamp={app,Brain,Arcade,startGame,finishGame,gameTick,toggleEvolution,evolutionTick,toggleImitation,imitationTick,save,setView,replay,scope,parameterChanged,activateModel};
+})();
+
+</script>
+</body>
+</html>
