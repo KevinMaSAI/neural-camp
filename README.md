@@ -2,7 +2,7 @@
 
 [在线试玩](https://kevinmasai.github.io/neural-camp/) · [下载源码](https://github.com/KevinMaSAI/neural-camp/archive/refs/heads/main.zip) · [测试说明](./测试说明.md) · [MIT 许可](./LICENSE)
 
-下载 `index.html` 后双击即可离线游玩；无需安装、服务器或构建。在线试玩在首次 Pages 部署完成后可用。
+点击「在线试玩」即可开始；下载 `index.html` 后双击也能离线游玩，无需安装、服务器或构建。
 
 ![神经网络训练营预览](./preview.png)
 
